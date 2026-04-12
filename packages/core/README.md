@@ -401,6 +401,11 @@ It compiles a navigation graph from your existing schema and resolves paths thro
 
 ---
 
+- [GitHub](https://github.com/charley-simon/linklab)
+- [Report an issue](https://github.com/charley-simon/linklab/issues)
+
+---
+
 ## License
 
 MIT — Charley Simon

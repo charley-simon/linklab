@@ -71,6 +71,12 @@ If something doesn't work, open an issue. If you have an idea, same.
 
 ---
 
+- [GitHub](https://github.com/charley-simon/linklab)
+- [Report an issue](https://github.com/charley-simon/linklab/issues)
+- [npm](#) *(coming soon)* 
+
+---
+
 ## License
 
 MIT — Charley Simon

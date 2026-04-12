@@ -388,6 +388,11 @@ If something doesn't work, open an issue. If you have an idea, same. This is a s
 
 ---
 
+- [GitHub](https://github.com/charley-simon/linklab)
+- [Report an issue](https://github.com/charley-simon/linklab/issues)
+
+---
+
 ## License
 
 MIT — Charley Simon

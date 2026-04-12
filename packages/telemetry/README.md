@@ -112,3 +112,14 @@ Requires `@linklab/core`.
 - [LinkLab core →](../linklab/README.md)
 - [CLI →](../linklab-cli/README.md)
 - [Article: Semantic navigation in a REST API](https://dev.to) *(coming soon)*
+  
+---
+
+- [GitHub](https://github.com/charley-simon/linklab)
+- [Report an issue](https://github.com/charley-simon/linklab/issues)
+
+---
+
+## License
+
+MIT — Charley Simon
