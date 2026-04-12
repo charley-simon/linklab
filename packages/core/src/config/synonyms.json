@@ -1,0 +1,28 @@
+{
+  "_comment": "Singular → plural irregular mappings for FK resolution. Used by JsonSchemaExtractor to resolve *Id columns to their target table. Add project-specific synonyms in examples/<project>/synonyms.json.",
+
+  "person":     "people",
+  "man":        "men",
+  "woman":      "women",
+  "child":      "children",
+
+  "company":    "companies",
+  "category":   "categories",
+  "country":    "countries",
+  "city":       "cities",
+  "currency":   "currencies",
+  "industry":   "industries",
+  "activity":   "activities",
+  "facility":   "facilities",
+  "capability": "capabilities",
+  "authority":  "authorities",
+  "community":  "communities",
+
+  "datum":      "data",
+  "medium":     "media",
+  "criterion":  "criteria",
+  "phenomenon": "phenomena",
+  "analysis":   "analyses",
+  "basis":      "bases",
+  "thesis":     "theses"
+}

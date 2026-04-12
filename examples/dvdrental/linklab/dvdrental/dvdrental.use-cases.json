@@ -1,0 +1,7 @@
+[
+  {
+    "from": "table_a",
+    "to": "table_b",
+    "description": "Example use case"
+  }
+]

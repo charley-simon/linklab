@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "gender": 2,
+  "name": "George Lucas",
+  "tmdbId": 1,
+  "imdbID": "nm0000184",
+  "biography": "George Walton Lucas Jr. (né le 14 mai 1944) est un cinéaste et entrepreneur américain. Lucas est connu pour avoir créé les franchises Star Wars et Indiana Jones et fondé Lucasfilm, LucasArts et Industrial Light & Magic. Il a été président de Lucasfilm avant de le vendre à The Walt Disney Company en 2012.  Après avoir obtenu son diplôme de l'Université de Californie du Sud en 1967, Lucas a co-fondé American Zoetrope avec le cinéaste Francis Ford Coppola. Lucas a écrit et réalisé THX 1138 (1971), basé sur son premier court métrage étudiant Electronic Labyrinth: THX 1138 4EB, qui fut un succès critique mais un échec financier. Son prochain travail en tant que scénariste-réalisateur fut le film American Graffiti (1973), inspiré par sa jeunesse au début des années 1960 à Modesto, en Californie, et produit par le tout nouveau Lucasfilm. Le film a connu un succès critique et commercial et a reçu cinq nominations aux Oscars, dont celle du meilleur film.",
+  "deathDay": null,
+  "birthDay": "1944-05-14",
+  "birthPlace": "Modesto, California, USA",
+  "homepage": null,
+  "popularity": 3.9062,
+  "imdbId": "nm0000184",
+  "wikidataId": "Q38222",
+  "wikiDescription": "cinéaste et producteur américain"
+}

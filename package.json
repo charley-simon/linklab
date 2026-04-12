@@ -1,0 +1,11 @@
+{
+  "name": "linklab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Semantic navigation graph for your data",
+  "author": "Charley Simon",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "entity": "Directors",
+    "id": 2,
+    "state": "RESOLVED",
+    "purpose": "explore"
+  },
+  {
+    "entity": "Movies",
+    "id": null,
+    "state": "UNRESOLVED",
+    "purpose": "list"
+  }
+]

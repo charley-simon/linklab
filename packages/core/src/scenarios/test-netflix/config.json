@@ -1,0 +1,6 @@
+{
+  "mode": "NAVIGATE",
+  "description": "Scénario Netflix — navigation dans un graphe généré automatiquement par le pipeline. Démontre les vues sémantiques (actor, director, writer...) issues de credits.jobId → jobs.",
+  "dataPath": "./data",
+  "graphGeneratedBy": "JsonSchemaExtractor → SchemaAnalyzer → GraphBuilder → GraphAssembler → GraphOptimizer"
+}

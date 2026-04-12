@@ -1,0 +1,796 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-02-27T17:14:01.899Z",
+  "database": {
+    "name": "dvdrental",
+    "type": "postgresql"
+  },
+  "tables": {
+    "actor": {
+      "name": "actor",
+      "label": "Actor",
+      "rowCount": 200,
+      "description": "",
+      "columns": [
+        {
+          "name": "actor_id",
+          "type": "integer",
+          "description": "",
+          "label": "Actor Id"
+        },
+        {
+          "name": "first_name",
+          "type": "character varying",
+          "description": "",
+          "label": "First Name"
+        },
+        {
+          "name": "last_name",
+          "type": "character varying",
+          "description": "",
+          "label": "Last Name"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "store": {
+      "name": "store",
+      "label": "Store",
+      "rowCount": 2,
+      "description": "",
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "integer",
+          "description": "",
+          "label": "Store Id"
+        },
+        {
+          "name": "manager_staff_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Manager Staff Id"
+        },
+        {
+          "name": "address_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Address Id"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "address": {
+      "name": "address",
+      "label": "Address",
+      "rowCount": 603,
+      "description": "",
+      "columns": [
+        {
+          "name": "address_id",
+          "type": "integer",
+          "description": "",
+          "label": "Address Id"
+        },
+        {
+          "name": "address",
+          "type": "character varying",
+          "description": "",
+          "label": "Address"
+        },
+        {
+          "name": "address2",
+          "type": "character varying",
+          "description": "",
+          "label": "Address2"
+        },
+        {
+          "name": "district",
+          "type": "character varying",
+          "description": "",
+          "label": "District"
+        },
+        {
+          "name": "city_id",
+          "type": "smallint",
+          "description": "",
+          "label": "City Id"
+        },
+        {
+          "name": "postal_code",
+          "type": "character varying",
+          "description": "",
+          "label": "Postal Code"
+        },
+        {
+          "name": "phone",
+          "type": "character varying",
+          "description": "",
+          "label": "Phone"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "category": {
+      "name": "category",
+      "label": "Category",
+      "rowCount": 16,
+      "description": "",
+      "columns": [
+        {
+          "name": "category_id",
+          "type": "integer",
+          "description": "",
+          "label": "Category Id"
+        },
+        {
+          "name": "name",
+          "type": "character varying",
+          "description": "",
+          "label": "Name"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "city": {
+      "name": "city",
+      "label": "City",
+      "rowCount": 600,
+      "description": "",
+      "columns": [
+        {
+          "name": "city_id",
+          "type": "integer",
+          "description": "",
+          "label": "City Id"
+        },
+        {
+          "name": "city",
+          "type": "character varying",
+          "description": "",
+          "label": "City"
+        },
+        {
+          "name": "country_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Country Id"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "country": {
+      "name": "country",
+      "label": "Country",
+      "rowCount": 109,
+      "description": "",
+      "columns": [
+        {
+          "name": "country_id",
+          "type": "integer",
+          "description": "",
+          "label": "Country Id"
+        },
+        {
+          "name": "country",
+          "type": "character varying",
+          "description": "",
+          "label": "Country"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "customer": {
+      "name": "customer",
+      "label": "Customer",
+      "rowCount": 599,
+      "description": "",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "integer",
+          "description": "",
+          "label": "Customer Id"
+        },
+        {
+          "name": "store_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Store Id"
+        },
+        {
+          "name": "first_name",
+          "type": "character varying",
+          "description": "",
+          "label": "First Name"
+        },
+        {
+          "name": "last_name",
+          "type": "character varying",
+          "description": "",
+          "label": "Last Name"
+        },
+        {
+          "name": "email",
+          "type": "character varying",
+          "description": "",
+          "label": "Email"
+        },
+        {
+          "name": "address_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Address Id"
+        },
+        {
+          "name": "activebool",
+          "type": "boolean",
+          "description": "",
+          "label": "Activebool"
+        },
+        {
+          "name": "create_date",
+          "type": "date",
+          "description": "",
+          "label": "Create Date"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        },
+        {
+          "name": "active",
+          "type": "integer",
+          "description": "",
+          "label": "Active"
+        }
+      ]
+    },
+    "film_actor": {
+      "name": "film_actor",
+      "label": "Film Actor",
+      "rowCount": 5462,
+      "description": "",
+      "columns": [
+        {
+          "name": "actor_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Actor Id"
+        },
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Film Id"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "film_category": {
+      "name": "film_category",
+      "label": "Film Category",
+      "rowCount": 1000,
+      "description": "",
+      "columns": [
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Film Id"
+        },
+        {
+          "name": "category_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Category Id"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "inventory": {
+      "name": "inventory",
+      "label": "Inventory",
+      "rowCount": 4581,
+      "description": "",
+      "columns": [
+        {
+          "name": "inventory_id",
+          "type": "integer",
+          "description": "",
+          "label": "Inventory Id"
+        },
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Film Id"
+        },
+        {
+          "name": "store_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Store Id"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "language": {
+      "name": "language",
+      "label": "Language",
+      "rowCount": 6,
+      "description": "",
+      "columns": [
+        {
+          "name": "language_id",
+          "type": "integer",
+          "description": "",
+          "label": "Language Id"
+        },
+        {
+          "name": "name",
+          "type": "character",
+          "description": "",
+          "label": "Name"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "rental": {
+      "name": "rental",
+      "label": "Rental",
+      "rowCount": 16044,
+      "description": "",
+      "columns": [
+        {
+          "name": "rental_id",
+          "type": "integer",
+          "description": "",
+          "label": "Rental Id"
+        },
+        {
+          "name": "rental_date",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Rental Date"
+        },
+        {
+          "name": "inventory_id",
+          "type": "integer",
+          "description": "",
+          "label": "Inventory Id"
+        },
+        {
+          "name": "customer_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Customer Id"
+        },
+        {
+          "name": "return_date",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Return Date"
+        },
+        {
+          "name": "staff_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Staff Id"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        }
+      ]
+    },
+    "staff": {
+      "name": "staff",
+      "label": "Staff",
+      "rowCount": 2,
+      "description": "",
+      "columns": [
+        {
+          "name": "staff_id",
+          "type": "integer",
+          "description": "",
+          "label": "Staff Id"
+        },
+        {
+          "name": "first_name",
+          "type": "character varying",
+          "description": "",
+          "label": "First Name"
+        },
+        {
+          "name": "last_name",
+          "type": "character varying",
+          "description": "",
+          "label": "Last Name"
+        },
+        {
+          "name": "address_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Address Id"
+        },
+        {
+          "name": "email",
+          "type": "character varying",
+          "description": "",
+          "label": "Email"
+        },
+        {
+          "name": "store_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Store Id"
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "description": "",
+          "label": "Active"
+        },
+        {
+          "name": "username",
+          "type": "character varying",
+          "description": "",
+          "label": "Username"
+        },
+        {
+          "name": "password",
+          "type": "character varying",
+          "description": "",
+          "label": "Password"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        },
+        {
+          "name": "picture",
+          "type": "bytea",
+          "description": "",
+          "label": "Picture"
+        }
+      ]
+    },
+    "payment": {
+      "name": "payment",
+      "label": "Payment",
+      "rowCount": 14596,
+      "description": "",
+      "columns": [
+        {
+          "name": "payment_id",
+          "type": "integer",
+          "description": "",
+          "label": "Payment Id"
+        },
+        {
+          "name": "customer_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Customer Id"
+        },
+        {
+          "name": "staff_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Staff Id"
+        },
+        {
+          "name": "rental_id",
+          "type": "integer",
+          "description": "",
+          "label": "Rental Id"
+        },
+        {
+          "name": "amount",
+          "type": "numeric",
+          "description": "",
+          "label": "Amount"
+        },
+        {
+          "name": "payment_date",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Payment Date"
+        }
+      ]
+    },
+    "film": {
+      "name": "film",
+      "label": "Film",
+      "rowCount": 1000,
+      "description": "",
+      "columns": [
+        {
+          "name": "film_id",
+          "type": "integer",
+          "description": "",
+          "label": "Film Id"
+        },
+        {
+          "name": "title",
+          "type": "character varying",
+          "description": "",
+          "label": "Title"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "description": "",
+          "label": "Description"
+        },
+        {
+          "name": "release_year",
+          "type": "integer",
+          "description": "",
+          "label": "Release Year"
+        },
+        {
+          "name": "language_id",
+          "type": "smallint",
+          "description": "",
+          "label": "Language Id"
+        },
+        {
+          "name": "rental_duration",
+          "type": "smallint",
+          "description": "",
+          "label": "Rental Duration"
+        },
+        {
+          "name": "rental_rate",
+          "type": "numeric",
+          "description": "",
+          "label": "Rental Rate"
+        },
+        {
+          "name": "length",
+          "type": "smallint",
+          "description": "",
+          "label": "Length"
+        },
+        {
+          "name": "replacement_cost",
+          "type": "numeric",
+          "description": "",
+          "label": "Replacement Cost"
+        },
+        {
+          "name": "rating",
+          "type": "USER-DEFINED",
+          "description": "",
+          "label": "Rating"
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "description": "",
+          "label": "Last Update"
+        },
+        {
+          "name": "special_features",
+          "type": "ARRAY",
+          "description": "",
+          "label": "Special Features"
+        },
+        {
+          "name": "fulltext",
+          "type": "tsvector",
+          "description": "",
+          "label": "Fulltext"
+        }
+      ]
+    }
+  },
+  "relations": [
+    {
+      "via": "address_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via address_id"
+    },
+    {
+      "via": "actor_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via actor_id"
+    },
+    {
+      "via": "film_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via film_id"
+    },
+    {
+      "via": "category_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via category_id"
+    },
+    {
+      "via": "film_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via film_id"
+    },
+    {
+      "via": "language_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via language_id"
+    },
+    {
+      "via": "city_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via city_id"
+    },
+    {
+      "via": "country_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via country_id"
+    },
+    {
+      "via": "film_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via film_id"
+    },
+    {
+      "via": "customer_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via customer_id"
+    },
+    {
+      "via": "rental_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via rental_id"
+    },
+    {
+      "via": "staff_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via staff_id"
+    },
+    {
+      "via": "customer_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via customer_id"
+    },
+    {
+      "via": "inventory_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via inventory_id"
+    },
+    {
+      "via": "staff_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via staff_id"
+    },
+    {
+      "via": "address_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via address_id"
+    },
+    {
+      "via": "address_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via address_id"
+    },
+    {
+      "via": "manager_staff_id",
+      "type": "foreign_key",
+      "label": "Unknown ➔ Unknown",
+      "cardinality": "one-to-many",
+      "description": "Lien sémantique via manager_staff_id"
+    }
+  ],
+  "labels": {
+    "actor": "Actor",
+    "store": "Store",
+    "address": "Address",
+    "category": "Category",
+    "city": "City",
+    "country": "Country",
+    "customer": "Customer",
+    "film_actor": "Film Actor",
+    "film_category": "Film Category",
+    "inventory": "Inventory",
+    "language": "Language",
+    "rental": "Rental",
+    "staff": "Staff",
+    "payment": "Payment",
+    "film": "Film"
+  },
+  "metadata": {
+    "totalTables": 15,
+    "totalRelations": 18,
+    "avgColumnsPerTable": 6
+  }
+}

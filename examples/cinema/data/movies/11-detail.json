@@ -1,0 +1,17 @@
+{
+  "id": 11,
+  "title": "La Guerre des étoiles",
+  "originalTitle": "Star Wars",
+  "genres": [
+    12,
+    28,
+    878
+  ],
+  "releaseYear": 1977,
+  "trailerSource": "",
+  "isLocal": false,
+  "movieSource": "",
+  "tagLine": "Il y a bien longtemps dans une galaxie très lointaine…",
+  "popularity": 112.284,
+  "vote": 8.205
+}

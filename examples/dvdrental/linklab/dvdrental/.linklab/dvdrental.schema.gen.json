@@ -1,0 +1,801 @@
+{
+  "source": {
+    "type": "postgresql",
+    "name": "dvdrental",
+    "generatedAt": "2026-04-12T11:24:29.760Z"
+  },
+  "entities": [
+    {
+      "name": "actor",
+      "properties": [
+        {
+          "name": "actor_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "first_name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 200
+    },
+    {
+      "name": "store",
+      "properties": [
+        {
+          "name": "store_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "manager_staff_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "staff",
+            "column": "staff_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "address_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "address",
+            "column": "address_id"
+          },
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 2
+    },
+    {
+      "name": "address",
+      "properties": [
+        {
+          "name": "address_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "address",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "address2",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "district",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "city_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "city",
+            "column": "city_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "postal_code",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "phone",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 603
+    },
+    {
+      "name": "category",
+      "properties": [
+        {
+          "name": "category_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 16
+    },
+    {
+      "name": "city",
+      "properties": [
+        {
+          "name": "city_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "city",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "country_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "country",
+            "column": "country_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 600
+    },
+    {
+      "name": "country",
+      "properties": [
+        {
+          "name": "country_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "country",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 109
+    },
+    {
+      "name": "customer",
+      "properties": [
+        {
+          "name": "customer_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "store_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "first_name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "email",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "address_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "address",
+            "column": "address_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "activebool",
+          "type": "boolean",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "create_date",
+          "type": "date",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "active",
+          "type": "integer",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 599
+    },
+    {
+      "name": "film_actor",
+      "properties": [
+        {
+          "name": "actor_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "actor_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": true,
+          "references": {
+            "table": "actor",
+            "column": "actor_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": true,
+          "references": {
+            "table": "film",
+            "column": "film_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 5462
+    },
+    {
+      "name": "film_category",
+      "properties": [
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": true,
+          "references": {
+            "table": "film",
+            "column": "film_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "category_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "category_id",
+          "type": "smallint",
+          "isPK": true,
+          "isFK": true,
+          "references": {
+            "table": "category",
+            "column": "category_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 1000
+    },
+    {
+      "name": "inventory",
+      "properties": [
+        {
+          "name": "inventory_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "film_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "film",
+            "column": "film_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "store_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 4581
+    },
+    {
+      "name": "language",
+      "properties": [
+        {
+          "name": "language_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "name",
+          "type": "character",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 6
+    },
+    {
+      "name": "rental",
+      "properties": [
+        {
+          "name": "rental_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "rental_date",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "inventory_id",
+          "type": "integer",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "inventory",
+            "column": "inventory_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "customer_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "customer",
+            "column": "customer_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "return_date",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "staff_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "staff",
+            "column": "staff_id"
+          },
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 16044
+    },
+    {
+      "name": "staff",
+      "properties": [
+        {
+          "name": "staff_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "first_name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_name",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "address_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "address",
+            "column": "address_id"
+          },
+          "isIndexed": false
+        },
+        {
+          "name": "email",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "store_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "username",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "password",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "picture",
+          "type": "bytea",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 2
+    },
+    {
+      "name": "payment",
+      "properties": [
+        {
+          "name": "payment_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "customer_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "customer",
+            "column": "customer_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "staff_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "staff",
+            "column": "staff_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "rental_id",
+          "type": "integer",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "rental",
+            "column": "rental_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "amount",
+          "type": "numeric",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "payment_date",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        }
+      ],
+      "rowCount": 14596
+    },
+    {
+      "name": "film",
+      "properties": [
+        {
+          "name": "film_id",
+          "type": "integer",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "title",
+          "type": "character varying",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "release_year",
+          "type": "integer",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "language_id",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": true,
+          "references": {
+            "table": "language",
+            "column": "language_id"
+          },
+          "isIndexed": true
+        },
+        {
+          "name": "rental_duration",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "rental_rate",
+          "type": "numeric",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "length",
+          "type": "smallint",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "replacement_cost",
+          "type": "numeric",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "rating",
+          "type": "USER-DEFINED",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "last_update",
+          "type": "timestamp without time zone",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "special_features",
+          "type": "ARRAY",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": false
+        },
+        {
+          "name": "fulltext",
+          "type": "tsvector",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true
+        }
+      ],
+      "rowCount": 1000
+    }
+  ]
+}

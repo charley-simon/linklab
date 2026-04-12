@@ -1,0 +1,358 @@
+{
+  "source": {
+    "type": "json_files",
+    "name": "data",
+    "generatedAt": "2026-04-12T14:57:26.170Z"
+  },
+  "entities": [
+    {
+      "name": "categories",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        }
+      ],
+      "rowCount": 18
+    },
+    {
+      "name": "credits",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "movieId",
+          "type": "number",
+          "isPK": false,
+          "isFK": true,
+          "isIndexed": true,
+          "nullable": false,
+          "references": {
+            "table": "movies",
+            "column": "id"
+          }
+        },
+        {
+          "name": "personId",
+          "type": "number",
+          "isPK": false,
+          "isFK": true,
+          "isIndexed": true,
+          "nullable": false,
+          "references": {
+            "table": "people",
+            "column": "id"
+          }
+        },
+        {
+          "name": "jobId",
+          "type": "number",
+          "isPK": false,
+          "isFK": true,
+          "isIndexed": true,
+          "nullable": false,
+          "references": {
+            "table": "jobs",
+            "column": "id"
+          }
+        }
+      ],
+      "rowCount": 2957
+    },
+    {
+      "name": "departments",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        }
+      ],
+      "rowCount": 4
+    },
+    {
+      "name": "jobs",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "departmentId",
+          "type": "number",
+          "isPK": false,
+          "isFK": true,
+          "isIndexed": true,
+          "nullable": false,
+          "references": {
+            "table": "departments",
+            "column": "id"
+          }
+        }
+      ],
+      "rowCount": 28
+    },
+    {
+      "name": "movies",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "originalTitle",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "categories",
+          "type": "array",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "releaseYear",
+          "type": "number",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "trailerSource",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "isLocal",
+          "type": "boolean",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "movieSource",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "synopsis",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "tagLine",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "popularity",
+          "type": "number",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "rating",
+          "type": "number",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        }
+      ],
+      "rowCount": 200
+    },
+    {
+      "name": "people",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "gender",
+          "type": "number",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        }
+      ],
+      "rowCount": 2363
+    },
+    {
+      "name": "users",
+      "properties": [
+        {
+          "name": "id",
+          "type": "number",
+          "isPK": true,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "isAdmin",
+          "type": "boolean",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        },
+        {
+          "name": "preferences",
+          "type": "object",
+          "isPK": false,
+          "isFK": false,
+          "isIndexed": true,
+          "nullable": false
+        }
+      ],
+      "rowCount": 5
+    }
+  ],
+  "advices": [
+    {
+      "type": "STRUCTURE",
+      "level": "INFO",
+      "target": "credits",
+      "message": "Pivot sémantique — segmentation possible par 'jobs'.",
+      "action": "SUGGEST_VIRTUAL_VIEWS"
+    }
+  ],
+  "weights": {
+    "categories.id": 1,
+    "categories.name": 1,
+    "credits.id": 2.4699999999999998,
+    "credits.movieId": 2.4699999999999998,
+    "credits.personId": 2.4699999999999998,
+    "credits.jobId": 2.4699999999999998,
+    "departments.id": 1,
+    "departments.name": 1,
+    "jobs.id": 1,
+    "jobs.name": 1,
+    "jobs.departmentId": 1,
+    "movies.id": 1,
+    "movies.title": 1,
+    "movies.originalTitle": 1,
+    "movies.categories": 1,
+    "movies.releaseYear": 1,
+    "movies.trailerSource": 1,
+    "movies.isLocal": 1,
+    "movies.movieSource": 1,
+    "movies.synopsis": 1,
+    "movies.tagLine": 1,
+    "movies.popularity": 1,
+    "movies.rating": 1,
+    "people.id": 2.37,
+    "people.gender": 2.37,
+    "people.name": 2.37,
+    "users.id": 1,
+    "users.name": 1,
+    "users.password": 1,
+    "users.isAdmin": 1,
+    "users.preferences": 1
+  },
+  "implicitRelations": []
+}

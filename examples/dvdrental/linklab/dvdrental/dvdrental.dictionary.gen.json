@@ -1,0 +1,2156 @@
+{
+  "tables": [
+    {
+      "name": "actor",
+      "columns": [
+        "actor_id",
+        "first_name",
+        "last_name",
+        "last_update"
+      ],
+      "rowCount": 200
+    },
+    {
+      "name": "store",
+      "columns": [
+        "store_id",
+        "manager_staff_id",
+        "address_id",
+        "last_update"
+      ],
+      "rowCount": 2
+    },
+    {
+      "name": "address",
+      "columns": [
+        "address_id",
+        "address",
+        "address2",
+        "district",
+        "city_id",
+        "postal_code",
+        "phone",
+        "last_update"
+      ],
+      "rowCount": 603
+    },
+    {
+      "name": "category",
+      "columns": [
+        "category_id",
+        "name",
+        "last_update"
+      ],
+      "rowCount": 16
+    },
+    {
+      "name": "city",
+      "columns": [
+        "city_id",
+        "city",
+        "country_id",
+        "last_update"
+      ],
+      "rowCount": 600
+    },
+    {
+      "name": "country",
+      "columns": [
+        "country_id",
+        "country",
+        "last_update"
+      ],
+      "rowCount": 109
+    },
+    {
+      "name": "customer",
+      "columns": [
+        "customer_id",
+        "store_id",
+        "first_name",
+        "last_name",
+        "email",
+        "address_id",
+        "activebool",
+        "create_date",
+        "last_update",
+        "active"
+      ],
+      "rowCount": 599
+    },
+    {
+      "name": "film_actor",
+      "columns": [
+        "actor_id",
+        "actor_id",
+        "film_id",
+        "film_id",
+        "last_update"
+      ],
+      "rowCount": 5462
+    },
+    {
+      "name": "film_category",
+      "columns": [
+        "film_id",
+        "film_id",
+        "category_id",
+        "category_id",
+        "last_update"
+      ],
+      "rowCount": 1000
+    },
+    {
+      "name": "inventory",
+      "columns": [
+        "inventory_id",
+        "film_id",
+        "store_id",
+        "last_update"
+      ],
+      "rowCount": 4581
+    },
+    {
+      "name": "language",
+      "columns": [
+        "language_id",
+        "name",
+        "last_update"
+      ],
+      "rowCount": 6
+    },
+    {
+      "name": "rental",
+      "columns": [
+        "rental_id",
+        "rental_date",
+        "inventory_id",
+        "customer_id",
+        "return_date",
+        "staff_id",
+        "last_update"
+      ],
+      "rowCount": 16044
+    },
+    {
+      "name": "staff",
+      "columns": [
+        "staff_id",
+        "first_name",
+        "last_name",
+        "address_id",
+        "email",
+        "store_id",
+        "active",
+        "username",
+        "password",
+        "last_update",
+        "picture"
+      ],
+      "rowCount": 2
+    },
+    {
+      "name": "payment",
+      "columns": [
+        "payment_id",
+        "customer_id",
+        "staff_id",
+        "rental_id",
+        "amount",
+        "payment_date"
+      ],
+      "rowCount": 14596
+    },
+    {
+      "name": "film",
+      "columns": [
+        "film_id",
+        "title",
+        "description",
+        "release_year",
+        "language_id",
+        "rental_duration",
+        "rental_rate",
+        "length",
+        "replacement_cost",
+        "rating",
+        "last_update",
+        "special_features",
+        "fulltext"
+      ],
+      "rowCount": 1000
+    }
+  ],
+  "relations": [
+    {
+      "from": "store",
+      "to": "staff",
+      "via": "manager_staff_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_manager_staff_id"
+    },
+    {
+      "from": "staff",
+      "to": "store",
+      "via": "manager_staff_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_STORE"
+    },
+    {
+      "from": "store",
+      "to": "address",
+      "via": "address_id",
+      "type": "physical",
+      "weight": 10,
+      "label": "FK_address_id"
+    },
+    {
+      "from": "address",
+      "to": "store",
+      "via": "address_id",
+      "type": "physical_reverse",
+      "weight": 11,
+      "label": "LIST_OF_STORE"
+    },
+    {
+      "from": "address",
+      "to": "city",
+      "via": "city_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_city_id"
+    },
+    {
+      "from": "city",
+      "to": "address",
+      "via": "city_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_ADDRESS"
+    },
+    {
+      "from": "city",
+      "to": "country",
+      "via": "country_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_country_id"
+    },
+    {
+      "from": "country",
+      "to": "city",
+      "via": "country_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_CITY"
+    },
+    {
+      "from": "customer",
+      "to": "address",
+      "via": "address_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_address_id"
+    },
+    {
+      "from": "address",
+      "to": "customer",
+      "via": "address_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_CUSTOMER"
+    },
+    {
+      "from": "film_actor",
+      "to": "actor",
+      "via": "actor_id",
+      "type": "physical",
+      "weight": 2.74,
+      "label": "FK_actor_id"
+    },
+    {
+      "from": "actor",
+      "to": "film_actor",
+      "via": "actor_id",
+      "type": "physical_reverse",
+      "weight": 3.0140000000000007,
+      "label": "LIST_OF_FILM_ACTOR"
+    },
+    {
+      "from": "film_actor",
+      "to": "film",
+      "via": "film_id",
+      "type": "physical",
+      "weight": 2.74,
+      "label": "FK_film_id"
+    },
+    {
+      "from": "film",
+      "to": "film_actor",
+      "via": "film_id",
+      "type": "physical_reverse",
+      "weight": 3.0140000000000007,
+      "label": "LIST_OF_FILM_ACTOR"
+    },
+    {
+      "from": "film_category",
+      "to": "film",
+      "via": "film_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_film_id"
+    },
+    {
+      "from": "film",
+      "to": "film_category",
+      "via": "film_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_FILM_CATEGORY"
+    },
+    {
+      "from": "film_category",
+      "to": "category",
+      "via": "category_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_category_id"
+    },
+    {
+      "from": "category",
+      "to": "film_category",
+      "via": "category_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_FILM_CATEGORY"
+    },
+    {
+      "from": "inventory",
+      "to": "film",
+      "via": "film_id",
+      "type": "physical",
+      "weight": 2.66,
+      "label": "FK_film_id"
+    },
+    {
+      "from": "film",
+      "to": "inventory",
+      "via": "film_id",
+      "type": "physical_reverse",
+      "weight": 2.9260000000000006,
+      "label": "LIST_OF_INVENTORY"
+    },
+    {
+      "from": "rental",
+      "to": "inventory",
+      "via": "inventory_id",
+      "type": "physical",
+      "weight": 3.21,
+      "label": "FK_inventory_id"
+    },
+    {
+      "from": "inventory",
+      "to": "rental",
+      "via": "inventory_id",
+      "type": "physical_reverse",
+      "weight": 3.531,
+      "label": "LIST_OF_RENTAL"
+    },
+    {
+      "from": "rental",
+      "to": "customer",
+      "via": "customer_id",
+      "type": "physical",
+      "weight": 3.21,
+      "label": "FK_customer_id"
+    },
+    {
+      "from": "customer",
+      "to": "rental",
+      "via": "customer_id",
+      "type": "physical_reverse",
+      "weight": 3.531,
+      "label": "LIST_OF_RENTAL"
+    },
+    {
+      "from": "rental",
+      "to": "staff",
+      "via": "staff_id",
+      "type": "physical",
+      "weight": 12.21,
+      "label": "FK_staff_id"
+    },
+    {
+      "from": "staff",
+      "to": "rental",
+      "via": "staff_id",
+      "type": "physical_reverse",
+      "weight": 13.431000000000003,
+      "label": "LIST_OF_RENTAL"
+    },
+    {
+      "from": "staff",
+      "to": "address",
+      "via": "address_id",
+      "type": "physical",
+      "weight": 10,
+      "label": "FK_address_id"
+    },
+    {
+      "from": "address",
+      "to": "staff",
+      "via": "address_id",
+      "type": "physical_reverse",
+      "weight": 11,
+      "label": "LIST_OF_STAFF"
+    },
+    {
+      "from": "payment",
+      "to": "customer",
+      "via": "customer_id",
+      "type": "physical",
+      "weight": 3.16,
+      "label": "FK_customer_id"
+    },
+    {
+      "from": "customer",
+      "to": "payment",
+      "via": "customer_id",
+      "type": "physical_reverse",
+      "weight": 3.4760000000000004,
+      "label": "LIST_OF_PAYMENT"
+    },
+    {
+      "from": "payment",
+      "to": "staff",
+      "via": "staff_id",
+      "type": "physical",
+      "weight": 3.16,
+      "label": "FK_staff_id"
+    },
+    {
+      "from": "staff",
+      "to": "payment",
+      "via": "staff_id",
+      "type": "physical_reverse",
+      "weight": 3.4760000000000004,
+      "label": "LIST_OF_PAYMENT"
+    },
+    {
+      "from": "payment",
+      "to": "rental",
+      "via": "rental_id",
+      "type": "physical",
+      "weight": 3.16,
+      "label": "FK_rental_id"
+    },
+    {
+      "from": "rental",
+      "to": "payment",
+      "via": "rental_id",
+      "type": "physical_reverse",
+      "weight": 3.4760000000000004,
+      "label": "LIST_OF_PAYMENT"
+    },
+    {
+      "from": "film",
+      "to": "language",
+      "via": "language_id",
+      "type": "physical",
+      "weight": 1,
+      "label": "FK_language_id"
+    },
+    {
+      "from": "language",
+      "to": "film",
+      "via": "language_id",
+      "type": "physical_reverse",
+      "weight": 1.1,
+      "label": "LIST_OF_FILM"
+    }
+  ],
+  "routes": {
+    "store→staff": {
+      "from": "store",
+      "to": "staff",
+      "label": "store_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "store→address": {
+      "from": "store",
+      "to": "address",
+      "label": "store_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.32
+    },
+    "store→city": {
+      "from": "store",
+      "to": "city",
+      "label": "store_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.32
+    },
+    "store→country": {
+      "from": "store",
+      "to": "country",
+      "label": "store_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.32
+    },
+    "store→customer": {
+      "from": "store",
+      "to": "customer",
+      "label": "store_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.32
+    },
+    "store→film_actor": {
+      "from": "store",
+      "to": "film_actor",
+      "label": "store_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 15.930000000000001
+    },
+    "store→actor": {
+      "from": "store",
+      "to": "actor",
+      "label": "store_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 18.67
+    },
+    "store→film": {
+      "from": "store",
+      "to": "film",
+      "label": "store_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.190000000000001
+    },
+    "store→film_category": {
+      "from": "store",
+      "to": "film_category",
+      "label": "store_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.190000000000001
+    },
+    "store→category": {
+      "from": "store",
+      "to": "category",
+      "label": "store_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 15.190000000000001
+    },
+    "store→inventory": {
+      "from": "store",
+      "to": "inventory",
+      "label": "store_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.530000000000001
+    },
+    "store→rental": {
+      "from": "store",
+      "to": "rental",
+      "label": "store_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.32
+    },
+    "store→payment": {
+      "from": "store",
+      "to": "payment",
+      "label": "store_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.16
+    },
+    "store→language": {
+      "from": "store",
+      "to": "language",
+      "label": "store_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.190000000000001
+    },
+    "staff→store": {
+      "from": "staff",
+      "to": "store",
+      "label": "staff_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "staff→address": {
+      "from": "staff",
+      "to": "address",
+      "label": "staff_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.32
+    },
+    "staff→city": {
+      "from": "staff",
+      "to": "city",
+      "label": "staff_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.32
+    },
+    "staff→country": {
+      "from": "staff",
+      "to": "country",
+      "label": "staff_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.32
+    },
+    "staff→customer": {
+      "from": "staff",
+      "to": "customer",
+      "label": "staff_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.32
+    },
+    "staff→film_actor": {
+      "from": "staff",
+      "to": "film_actor",
+      "label": "staff_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.930000000000001
+    },
+    "staff→actor": {
+      "from": "staff",
+      "to": "actor",
+      "label": "staff_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 17.67
+    },
+    "staff→film": {
+      "from": "staff",
+      "to": "film",
+      "label": "staff_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.190000000000001
+    },
+    "staff→film_category": {
+      "from": "staff",
+      "to": "film_category",
+      "label": "staff_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.190000000000001
+    },
+    "staff→category": {
+      "from": "staff",
+      "to": "category",
+      "label": "staff_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.190000000000001
+    },
+    "staff→inventory": {
+      "from": "staff",
+      "to": "inventory",
+      "label": "staff_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.530000000000001
+    },
+    "staff→rental": {
+      "from": "staff",
+      "to": "rental",
+      "label": "staff_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.32
+    },
+    "staff→payment": {
+      "from": "staff",
+      "to": "payment",
+      "label": "staff_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.16
+    },
+    "staff→language": {
+      "from": "staff",
+      "to": "language",
+      "label": "staff_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.190000000000001
+    },
+    "address→store": {
+      "from": "address",
+      "to": "store",
+      "label": "address_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.32
+    },
+    "address→staff": {
+      "from": "address",
+      "to": "staff",
+      "label": "address_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.32
+    },
+    "address→city": {
+      "from": "address",
+      "to": "city",
+      "label": "address_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "address→country": {
+      "from": "address",
+      "to": "country",
+      "label": "address_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "address→customer": {
+      "from": "address",
+      "to": "customer",
+      "label": "address_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "address→film_actor": {
+      "from": "address",
+      "to": "film_actor",
+      "label": "address_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.82
+    },
+    "address→actor": {
+      "from": "address",
+      "to": "actor",
+      "label": "address_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 15.56
+    },
+    "address→film": {
+      "from": "address",
+      "to": "film",
+      "label": "address_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.08
+    },
+    "address→film_category": {
+      "from": "address",
+      "to": "film_category",
+      "label": "address_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "address→category": {
+      "from": "address",
+      "to": "category",
+      "label": "address_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "address→inventory": {
+      "from": "address",
+      "to": "inventory",
+      "label": "address_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.42
+    },
+    "address→rental": {
+      "from": "address",
+      "to": "rental",
+      "label": "address_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.21
+    },
+    "address→payment": {
+      "from": "address",
+      "to": "payment",
+      "label": "address_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.16
+    },
+    "address→language": {
+      "from": "address",
+      "to": "language",
+      "label": "address_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "city→store": {
+      "from": "city",
+      "to": "store",
+      "label": "city_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.32
+    },
+    "city→staff": {
+      "from": "city",
+      "to": "staff",
+      "label": "city_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.32
+    },
+    "city→address": {
+      "from": "city",
+      "to": "address",
+      "label": "city_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "city→country": {
+      "from": "city",
+      "to": "country",
+      "label": "city_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "city→customer": {
+      "from": "city",
+      "to": "customer",
+      "label": "city_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "city→film_actor": {
+      "from": "city",
+      "to": "film_actor",
+      "label": "city_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.82
+    },
+    "city→actor": {
+      "from": "city",
+      "to": "actor",
+      "label": "city_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 16.560000000000002
+    },
+    "city→film": {
+      "from": "city",
+      "to": "film",
+      "label": "city_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "city→film_category": {
+      "from": "city",
+      "to": "film_category",
+      "label": "city_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "city→category": {
+      "from": "city",
+      "to": "category",
+      "label": "city_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.08
+    },
+    "city→inventory": {
+      "from": "city",
+      "to": "inventory",
+      "label": "city_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.42
+    },
+    "city→rental": {
+      "from": "city",
+      "to": "rental",
+      "label": "city_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.21
+    },
+    "city→payment": {
+      "from": "city",
+      "to": "payment",
+      "label": "city_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.16
+    },
+    "city→language": {
+      "from": "city",
+      "to": "language",
+      "label": "city_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "country→store": {
+      "from": "country",
+      "to": "store",
+      "label": "country_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.32
+    },
+    "country→staff": {
+      "from": "country",
+      "to": "staff",
+      "label": "country_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.32
+    },
+    "country→address": {
+      "from": "country",
+      "to": "address",
+      "label": "country_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "country→city": {
+      "from": "country",
+      "to": "city",
+      "label": "country_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "country→customer": {
+      "from": "country",
+      "to": "customer",
+      "label": "country_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 3
+    },
+    "country→film_actor": {
+      "from": "country",
+      "to": "film_actor",
+      "label": "country_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.82
+    },
+    "country→actor": {
+      "from": "country",
+      "to": "actor",
+      "label": "country_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 17.560000000000002
+    },
+    "country→film": {
+      "from": "country",
+      "to": "film",
+      "label": "country_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "country→film_category": {
+      "from": "country",
+      "to": "film_category",
+      "label": "country_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.08
+    },
+    "country→category": {
+      "from": "country",
+      "to": "category",
+      "label": "country_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.08
+    },
+    "country→inventory": {
+      "from": "country",
+      "to": "inventory",
+      "label": "country_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.42
+    },
+    "country→rental": {
+      "from": "country",
+      "to": "rental",
+      "label": "country_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.21
+    },
+    "country→payment": {
+      "from": "country",
+      "to": "payment",
+      "label": "country_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.16
+    },
+    "country→language": {
+      "from": "country",
+      "to": "language",
+      "label": "country_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.08
+    },
+    "customer→store": {
+      "from": "customer",
+      "to": "store",
+      "label": "customer_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.32
+    },
+    "customer→staff": {
+      "from": "customer",
+      "to": "staff",
+      "label": "customer_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.32
+    },
+    "customer→address": {
+      "from": "customer",
+      "to": "address",
+      "label": "customer_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "customer→city": {
+      "from": "customer",
+      "to": "city",
+      "label": "customer_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "customer→country": {
+      "from": "customer",
+      "to": "country",
+      "label": "customer_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 3
+    },
+    "customer→film_actor": {
+      "from": "customer",
+      "to": "film_actor",
+      "label": "customer_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.82
+    },
+    "customer→actor": {
+      "from": "customer",
+      "to": "actor",
+      "label": "customer_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.56
+    },
+    "customer→film": {
+      "from": "customer",
+      "to": "film",
+      "label": "customer_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.08
+    },
+    "customer→film_category": {
+      "from": "customer",
+      "to": "film_category",
+      "label": "customer_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.08
+    },
+    "customer→category": {
+      "from": "customer",
+      "to": "category",
+      "label": "customer_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "customer→inventory": {
+      "from": "customer",
+      "to": "inventory",
+      "label": "customer_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.42
+    },
+    "customer→rental": {
+      "from": "customer",
+      "to": "rental",
+      "label": "customer_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.21
+    },
+    "customer→payment": {
+      "from": "customer",
+      "to": "payment",
+      "label": "customer_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.16
+    },
+    "customer→language": {
+      "from": "customer",
+      "to": "language",
+      "label": "customer_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.08
+    },
+    "film_actor→store": {
+      "from": "film_actor",
+      "to": "store",
+      "label": "film_actor_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 15.93
+    },
+    "film_actor→staff": {
+      "from": "film_actor",
+      "to": "staff",
+      "label": "film_actor_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.93
+    },
+    "film_actor→address": {
+      "from": "film_actor",
+      "to": "address",
+      "label": "film_actor_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.82
+    },
+    "film_actor→city": {
+      "from": "film_actor",
+      "to": "city",
+      "label": "film_actor_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.82
+    },
+    "film_actor→country": {
+      "from": "film_actor",
+      "to": "country",
+      "label": "film_actor_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.82
+    },
+    "film_actor→customer": {
+      "from": "film_actor",
+      "to": "customer",
+      "label": "film_actor_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.82
+    },
+    "film_actor→actor": {
+      "from": "film_actor",
+      "to": "actor",
+      "label": "film_actor_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 2.74
+    },
+    "film_actor→film": {
+      "from": "film_actor",
+      "to": "film",
+      "label": "film_actor_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 2.74
+    },
+    "film_actor→film_category": {
+      "from": "film_actor",
+      "to": "film_category",
+      "label": "film_actor_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.74
+    },
+    "film_actor→category": {
+      "from": "film_actor",
+      "to": "category",
+      "label": "film_actor_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.74
+    },
+    "film_actor→inventory": {
+      "from": "film_actor",
+      "to": "inventory",
+      "label": "film_actor_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.4
+    },
+    "film_actor→rental": {
+      "from": "film_actor",
+      "to": "rental",
+      "label": "film_actor_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.61
+    },
+    "film_actor→payment": {
+      "from": "film_actor",
+      "to": "payment",
+      "label": "film_actor_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.77
+    },
+    "film_actor→language": {
+      "from": "film_actor",
+      "to": "language",
+      "label": "film_actor_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.74
+    },
+    "actor→store": {
+      "from": "actor",
+      "to": "store",
+      "label": "actor_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 18.67
+    },
+    "actor→staff": {
+      "from": "actor",
+      "to": "staff",
+      "label": "actor_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 17.67
+    },
+    "actor→address": {
+      "from": "actor",
+      "to": "address",
+      "label": "actor_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 15.560000000000002
+    },
+    "actor→city": {
+      "from": "actor",
+      "to": "city",
+      "label": "actor_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 16.560000000000002
+    },
+    "actor→country": {
+      "from": "actor",
+      "to": "country",
+      "label": "actor_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 17.560000000000002
+    },
+    "actor→customer": {
+      "from": "actor",
+      "to": "customer",
+      "label": "actor_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.560000000000002
+    },
+    "actor→film_actor": {
+      "from": "actor",
+      "to": "film_actor",
+      "label": "actor_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 2.74
+    },
+    "actor→film": {
+      "from": "actor",
+      "to": "film",
+      "label": "actor_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.48
+    },
+    "actor→film_category": {
+      "from": "actor",
+      "to": "film_category",
+      "label": "actor_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.48
+    },
+    "actor→category": {
+      "from": "actor",
+      "to": "category",
+      "label": "actor_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.48
+    },
+    "actor→inventory": {
+      "from": "actor",
+      "to": "inventory",
+      "label": "actor_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.14
+    },
+    "actor→rental": {
+      "from": "actor",
+      "to": "rental",
+      "label": "actor_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.350000000000001
+    },
+    "actor→payment": {
+      "from": "actor",
+      "to": "payment",
+      "label": "actor_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.510000000000002
+    },
+    "actor→language": {
+      "from": "actor",
+      "to": "language",
+      "label": "actor_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.48
+    },
+    "film→store": {
+      "from": "film",
+      "to": "store",
+      "label": "film_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.190000000000001
+    },
+    "film→staff": {
+      "from": "film",
+      "to": "staff",
+      "label": "film_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.190000000000001
+    },
+    "film→address": {
+      "from": "film",
+      "to": "address",
+      "label": "film_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.08
+    },
+    "film→city": {
+      "from": "film",
+      "to": "city",
+      "label": "film_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "film→country": {
+      "from": "film",
+      "to": "country",
+      "label": "film_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "film→customer": {
+      "from": "film",
+      "to": "customer",
+      "label": "film_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.08
+    },
+    "film→film_actor": {
+      "from": "film",
+      "to": "film_actor",
+      "label": "film_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 2.74
+    },
+    "film→actor": {
+      "from": "film",
+      "to": "actor",
+      "label": "film_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.48
+    },
+    "film→film_category": {
+      "from": "film",
+      "to": "film_category",
+      "label": "film_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "film→category": {
+      "from": "film",
+      "to": "category",
+      "label": "film_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "film→inventory": {
+      "from": "film",
+      "to": "inventory",
+      "label": "film_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 2.66
+    },
+    "film→rental": {
+      "from": "film",
+      "to": "rental",
+      "label": "film_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.87
+    },
+    "film→payment": {
+      "from": "film",
+      "to": "payment",
+      "label": "film_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.030000000000001
+    },
+    "film→language": {
+      "from": "film",
+      "to": "language",
+      "label": "film_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "film_category→store": {
+      "from": "film_category",
+      "to": "store",
+      "label": "film_category_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.190000000000001
+    },
+    "film_category→staff": {
+      "from": "film_category",
+      "to": "staff",
+      "label": "film_category_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.190000000000001
+    },
+    "film_category→address": {
+      "from": "film_category",
+      "to": "address",
+      "label": "film_category_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "film_category→city": {
+      "from": "film_category",
+      "to": "city",
+      "label": "film_category_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "film_category→country": {
+      "from": "film_category",
+      "to": "country",
+      "label": "film_category_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.08
+    },
+    "film_category→customer": {
+      "from": "film_category",
+      "to": "customer",
+      "label": "film_category_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.08
+    },
+    "film_category→film_actor": {
+      "from": "film_category",
+      "to": "film_actor",
+      "label": "film_category_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.74
+    },
+    "film_category→actor": {
+      "from": "film_category",
+      "to": "actor",
+      "label": "film_category_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.48
+    },
+    "film_category→film": {
+      "from": "film_category",
+      "to": "film",
+      "label": "film_category_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "film_category→category": {
+      "from": "film_category",
+      "to": "category",
+      "label": "film_category_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "film_category→inventory": {
+      "from": "film_category",
+      "to": "inventory",
+      "label": "film_category_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.66
+    },
+    "film_category→rental": {
+      "from": "film_category",
+      "to": "rental",
+      "label": "film_category_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.87
+    },
+    "film_category→payment": {
+      "from": "film_category",
+      "to": "payment",
+      "label": "film_category_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.030000000000001
+    },
+    "film_category→language": {
+      "from": "film_category",
+      "to": "language",
+      "label": "film_category_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "category→store": {
+      "from": "category",
+      "to": "store",
+      "label": "category_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 15.190000000000001
+    },
+    "category→staff": {
+      "from": "category",
+      "to": "staff",
+      "label": "category_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.190000000000001
+    },
+    "category→address": {
+      "from": "category",
+      "to": "address",
+      "label": "category_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "category→city": {
+      "from": "category",
+      "to": "city",
+      "label": "category_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.08
+    },
+    "category→country": {
+      "from": "category",
+      "to": "country",
+      "label": "category_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.08
+    },
+    "category→customer": {
+      "from": "category",
+      "to": "customer",
+      "label": "category_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "category→film_actor": {
+      "from": "category",
+      "to": "film_actor",
+      "label": "category_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.74
+    },
+    "category→actor": {
+      "from": "category",
+      "to": "actor",
+      "label": "category_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.48
+    },
+    "category→film": {
+      "from": "category",
+      "to": "film",
+      "label": "category_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "category→film_category": {
+      "from": "category",
+      "to": "film_category",
+      "label": "category_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "category→inventory": {
+      "from": "category",
+      "to": "inventory",
+      "label": "category_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.66
+    },
+    "category→rental": {
+      "from": "category",
+      "to": "rental",
+      "label": "category_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.87
+    },
+    "category→payment": {
+      "from": "category",
+      "to": "payment",
+      "label": "category_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.030000000000001
+    },
+    "category→language": {
+      "from": "category",
+      "to": "language",
+      "label": "category_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 3
+    },
+    "inventory→store": {
+      "from": "inventory",
+      "to": "store",
+      "label": "inventory_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.530000000000001
+    },
+    "inventory→staff": {
+      "from": "inventory",
+      "to": "staff",
+      "label": "inventory_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.530000000000001
+    },
+    "inventory→address": {
+      "from": "inventory",
+      "to": "address",
+      "label": "inventory_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.42
+    },
+    "inventory→city": {
+      "from": "inventory",
+      "to": "city",
+      "label": "inventory_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.42
+    },
+    "inventory→country": {
+      "from": "inventory",
+      "to": "country",
+      "label": "inventory_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.42
+    },
+    "inventory→customer": {
+      "from": "inventory",
+      "to": "customer",
+      "label": "inventory_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.42
+    },
+    "inventory→film_actor": {
+      "from": "inventory",
+      "to": "film_actor",
+      "label": "inventory_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.4
+    },
+    "inventory→actor": {
+      "from": "inventory",
+      "to": "actor",
+      "label": "inventory_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.14
+    },
+    "inventory→film": {
+      "from": "inventory",
+      "to": "film",
+      "label": "inventory_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 2.66
+    },
+    "inventory→film_category": {
+      "from": "inventory",
+      "to": "film_category",
+      "label": "inventory_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.66
+    },
+    "inventory→category": {
+      "from": "inventory",
+      "to": "category",
+      "label": "inventory_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.66
+    },
+    "inventory→rental": {
+      "from": "inventory",
+      "to": "rental",
+      "label": "inventory_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.21
+    },
+    "inventory→payment": {
+      "from": "inventory",
+      "to": "payment",
+      "label": "inventory_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.37
+    },
+    "inventory→language": {
+      "from": "inventory",
+      "to": "language",
+      "label": "inventory_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.66
+    },
+    "rental→store": {
+      "from": "rental",
+      "to": "store",
+      "label": "rental_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.32
+    },
+    "rental→staff": {
+      "from": "rental",
+      "to": "staff",
+      "label": "rental_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.32
+    },
+    "rental→address": {
+      "from": "rental",
+      "to": "address",
+      "label": "rental_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.21
+    },
+    "rental→city": {
+      "from": "rental",
+      "to": "city",
+      "label": "rental_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.21
+    },
+    "rental→country": {
+      "from": "rental",
+      "to": "country",
+      "label": "rental_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.21
+    },
+    "rental→customer": {
+      "from": "rental",
+      "to": "customer",
+      "label": "rental_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.21
+    },
+    "rental→film_actor": {
+      "from": "rental",
+      "to": "film_actor",
+      "label": "rental_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 8.61
+    },
+    "rental→actor": {
+      "from": "rental",
+      "to": "actor",
+      "label": "rental_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.35
+    },
+    "rental→film": {
+      "from": "rental",
+      "to": "film",
+      "label": "rental_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.87
+    },
+    "rental→film_category": {
+      "from": "rental",
+      "to": "film_category",
+      "label": "rental_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.87
+    },
+    "rental→category": {
+      "from": "rental",
+      "to": "category",
+      "label": "rental_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 7.87
+    },
+    "rental→inventory": {
+      "from": "rental",
+      "to": "inventory",
+      "label": "rental_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.21
+    },
+    "rental→payment": {
+      "from": "rental",
+      "to": "payment",
+      "label": "rental_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.16
+    },
+    "rental→language": {
+      "from": "rental",
+      "to": "language",
+      "label": "rental_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.87
+    },
+    "payment→store": {
+      "from": "payment",
+      "to": "store",
+      "label": "payment_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.16
+    },
+    "payment→staff": {
+      "from": "payment",
+      "to": "staff",
+      "label": "payment_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.16
+    },
+    "payment→address": {
+      "from": "payment",
+      "to": "address",
+      "label": "payment_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 4.16
+    },
+    "payment→city": {
+      "from": "payment",
+      "to": "city",
+      "label": "payment_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 5.16
+    },
+    "payment→country": {
+      "from": "payment",
+      "to": "country",
+      "label": "payment_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.16
+    },
+    "payment→customer": {
+      "from": "payment",
+      "to": "customer",
+      "label": "payment_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.16
+    },
+    "payment→film_actor": {
+      "from": "payment",
+      "to": "film_actor",
+      "label": "payment_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.770000000000001
+    },
+    "payment→actor": {
+      "from": "payment",
+      "to": "actor",
+      "label": "payment_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.510000000000002
+    },
+    "payment→film": {
+      "from": "payment",
+      "to": "film",
+      "label": "payment_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 9.030000000000001
+    },
+    "payment→film_category": {
+      "from": "payment",
+      "to": "film_category",
+      "label": "payment_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.030000000000001
+    },
+    "payment→category": {
+      "from": "payment",
+      "to": "category",
+      "label": "payment_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.030000000000001
+    },
+    "payment→inventory": {
+      "from": "payment",
+      "to": "inventory",
+      "label": "payment_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.37
+    },
+    "payment→rental": {
+      "from": "payment",
+      "to": "rental",
+      "label": "payment_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.16
+    },
+    "payment→language": {
+      "from": "payment",
+      "to": "language",
+      "label": "payment_to_language",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.030000000000001
+    },
+    "language→store": {
+      "from": "language",
+      "to": "store",
+      "label": "language_to_store",
+      "semantic": false,
+      "composed": false,
+      "weight": 14.190000000000001
+    },
+    "language→staff": {
+      "from": "language",
+      "to": "staff",
+      "label": "language_to_staff",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.190000000000001
+    },
+    "language→address": {
+      "from": "language",
+      "to": "address",
+      "label": "language_to_address",
+      "semantic": false,
+      "composed": false,
+      "weight": 11.08
+    },
+    "language→city": {
+      "from": "language",
+      "to": "city",
+      "label": "language_to_city",
+      "semantic": false,
+      "composed": false,
+      "weight": 12.08
+    },
+    "language→country": {
+      "from": "language",
+      "to": "country",
+      "label": "language_to_country",
+      "semantic": false,
+      "composed": false,
+      "weight": 13.08
+    },
+    "language→customer": {
+      "from": "language",
+      "to": "customer",
+      "label": "language_to_customer",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.08
+    },
+    "language→film_actor": {
+      "from": "language",
+      "to": "film_actor",
+      "label": "language_to_film_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.74
+    },
+    "language→actor": {
+      "from": "language",
+      "to": "actor",
+      "label": "language_to_actor",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.48
+    },
+    "language→film": {
+      "from": "language",
+      "to": "film",
+      "label": "language_to_film",
+      "semantic": false,
+      "composed": false,
+      "weight": 1
+    },
+    "language→film_category": {
+      "from": "language",
+      "to": "film_category",
+      "label": "language_to_film_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 2
+    },
+    "language→category": {
+      "from": "language",
+      "to": "category",
+      "label": "language_to_category",
+      "semantic": false,
+      "composed": false,
+      "weight": 3
+    },
+    "language→inventory": {
+      "from": "language",
+      "to": "inventory",
+      "label": "language_to_inventory",
+      "semantic": false,
+      "composed": false,
+      "weight": 3.66
+    },
+    "language→rental": {
+      "from": "language",
+      "to": "rental",
+      "label": "language_to_rental",
+      "semantic": false,
+      "composed": false,
+      "weight": 6.87
+    },
+    "language→payment": {
+      "from": "language",
+      "to": "payment",
+      "label": "language_to_payment",
+      "semantic": false,
+      "composed": false,
+      "weight": 10.030000000000001
+    }
+  }
+}

@@ -1,0 +1,831 @@
+{
+  "nodes": [
+    {
+      "id": "actor",
+      "type": "table",
+      "rowCount": 200,
+      "columns": [
+        {
+          "name": "actor_id",
+          "type": "string"
+        },
+        {
+          "name": "first_name",
+          "type": "string"
+        },
+        {
+          "name": "last_name",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "store",
+      "type": "table",
+      "rowCount": 2,
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "string"
+        },
+        {
+          "name": "manager_staff_id",
+          "type": "string"
+        },
+        {
+          "name": "address_id",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "address",
+      "type": "table",
+      "rowCount": 603,
+      "columns": [
+        {
+          "name": "address_id",
+          "type": "string"
+        },
+        {
+          "name": "address",
+          "type": "string"
+        },
+        {
+          "name": "address2",
+          "type": "string"
+        },
+        {
+          "name": "district",
+          "type": "string"
+        },
+        {
+          "name": "city_id",
+          "type": "string"
+        },
+        {
+          "name": "postal_code",
+          "type": "string"
+        },
+        {
+          "name": "phone",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "category",
+      "type": "table",
+      "rowCount": 16,
+      "columns": [
+        {
+          "name": "category_id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "city",
+      "type": "table",
+      "rowCount": 600,
+      "columns": [
+        {
+          "name": "city_id",
+          "type": "string"
+        },
+        {
+          "name": "city",
+          "type": "string"
+        },
+        {
+          "name": "country_id",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "country",
+      "type": "table",
+      "rowCount": 109,
+      "columns": [
+        {
+          "name": "country_id",
+          "type": "string"
+        },
+        {
+          "name": "country",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "customer",
+      "type": "table",
+      "rowCount": 599,
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "string"
+        },
+        {
+          "name": "store_id",
+          "type": "string"
+        },
+        {
+          "name": "first_name",
+          "type": "string"
+        },
+        {
+          "name": "last_name",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "address_id",
+          "type": "string"
+        },
+        {
+          "name": "activebool",
+          "type": "string"
+        },
+        {
+          "name": "create_date",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        },
+        {
+          "name": "active",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "film_actor",
+      "type": "table",
+      "rowCount": 5462,
+      "columns": [
+        {
+          "name": "actor_id",
+          "type": "string"
+        },
+        {
+          "name": "actor_id",
+          "type": "string"
+        },
+        {
+          "name": "film_id",
+          "type": "string"
+        },
+        {
+          "name": "film_id",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "film_category",
+      "type": "table",
+      "rowCount": 1000,
+      "columns": [
+        {
+          "name": "film_id",
+          "type": "string"
+        },
+        {
+          "name": "film_id",
+          "type": "string"
+        },
+        {
+          "name": "category_id",
+          "type": "string"
+        },
+        {
+          "name": "category_id",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "inventory",
+      "type": "table",
+      "rowCount": 4581,
+      "columns": [
+        {
+          "name": "inventory_id",
+          "type": "string"
+        },
+        {
+          "name": "film_id",
+          "type": "string"
+        },
+        {
+          "name": "store_id",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "language",
+      "type": "table",
+      "rowCount": 6,
+      "columns": [
+        {
+          "name": "language_id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "rental",
+      "type": "table",
+      "rowCount": 16044,
+      "columns": [
+        {
+          "name": "rental_id",
+          "type": "string"
+        },
+        {
+          "name": "rental_date",
+          "type": "string"
+        },
+        {
+          "name": "inventory_id",
+          "type": "string"
+        },
+        {
+          "name": "customer_id",
+          "type": "string"
+        },
+        {
+          "name": "return_date",
+          "type": "string"
+        },
+        {
+          "name": "staff_id",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "staff",
+      "type": "table",
+      "rowCount": 2,
+      "columns": [
+        {
+          "name": "staff_id",
+          "type": "string"
+        },
+        {
+          "name": "first_name",
+          "type": "string"
+        },
+        {
+          "name": "last_name",
+          "type": "string"
+        },
+        {
+          "name": "address_id",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "store_id",
+          "type": "string"
+        },
+        {
+          "name": "active",
+          "type": "string"
+        },
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        },
+        {
+          "name": "picture",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "payment",
+      "type": "table",
+      "rowCount": 14596,
+      "columns": [
+        {
+          "name": "payment_id",
+          "type": "string"
+        },
+        {
+          "name": "customer_id",
+          "type": "string"
+        },
+        {
+          "name": "staff_id",
+          "type": "string"
+        },
+        {
+          "name": "rental_id",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "string"
+        },
+        {
+          "name": "payment_date",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "film",
+      "type": "table",
+      "rowCount": 1000,
+      "columns": [
+        {
+          "name": "film_id",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "release_year",
+          "type": "string"
+        },
+        {
+          "name": "language_id",
+          "type": "string"
+        },
+        {
+          "name": "rental_duration",
+          "type": "string"
+        },
+        {
+          "name": "rental_rate",
+          "type": "string"
+        },
+        {
+          "name": "length",
+          "type": "string"
+        },
+        {
+          "name": "replacement_cost",
+          "type": "string"
+        },
+        {
+          "name": "rating",
+          "type": "string"
+        },
+        {
+          "name": "last_update",
+          "type": "string"
+        },
+        {
+          "name": "special_features",
+          "type": "string"
+        },
+        {
+          "name": "fulltext",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "name": "FK_manager_staff_id",
+      "from": "store",
+      "to": "staff",
+      "via": "manager_staff_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_STORE",
+      "from": "staff",
+      "to": "store",
+      "via": "manager_staff_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_address_id",
+      "from": "store",
+      "to": "address",
+      "via": "address_id",
+      "weight": 10,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_STORE",
+      "from": "address",
+      "to": "store",
+      "via": "address_id",
+      "weight": 11,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_city_id",
+      "from": "address",
+      "to": "city",
+      "via": "city_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_ADDRESS",
+      "from": "city",
+      "to": "address",
+      "via": "city_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_country_id",
+      "from": "city",
+      "to": "country",
+      "via": "country_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_CITY",
+      "from": "country",
+      "to": "city",
+      "via": "country_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_address_id",
+      "from": "customer",
+      "to": "address",
+      "via": "address_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_CUSTOMER",
+      "from": "address",
+      "to": "customer",
+      "via": "address_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_actor_id",
+      "from": "film_actor",
+      "to": "actor",
+      "via": "actor_id",
+      "weight": 2.74,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_FILM_ACTOR",
+      "from": "actor",
+      "to": "film_actor",
+      "via": "actor_id",
+      "weight": 3.0140000000000007,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_film_id",
+      "from": "film_actor",
+      "to": "film",
+      "via": "film_id",
+      "weight": 2.74,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_FILM_ACTOR",
+      "from": "film",
+      "to": "film_actor",
+      "via": "film_id",
+      "weight": 3.0140000000000007,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_film_id",
+      "from": "film_category",
+      "to": "film",
+      "via": "film_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_FILM_CATEGORY",
+      "from": "film",
+      "to": "film_category",
+      "via": "film_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_category_id",
+      "from": "film_category",
+      "to": "category",
+      "via": "category_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_FILM_CATEGORY",
+      "from": "category",
+      "to": "film_category",
+      "via": "category_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_film_id",
+      "from": "inventory",
+      "to": "film",
+      "via": "film_id",
+      "weight": 2.66,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_INVENTORY",
+      "from": "film",
+      "to": "inventory",
+      "via": "film_id",
+      "weight": 2.9260000000000006,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_inventory_id",
+      "from": "rental",
+      "to": "inventory",
+      "via": "inventory_id",
+      "weight": 3.21,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_RENTAL",
+      "from": "inventory",
+      "to": "rental",
+      "via": "inventory_id",
+      "weight": 3.531,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_customer_id",
+      "from": "rental",
+      "to": "customer",
+      "via": "customer_id",
+      "weight": 3.21,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_RENTAL",
+      "from": "customer",
+      "to": "rental",
+      "via": "customer_id",
+      "weight": 3.531,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_staff_id",
+      "from": "rental",
+      "to": "staff",
+      "via": "staff_id",
+      "weight": 12.21,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_RENTAL",
+      "from": "staff",
+      "to": "rental",
+      "via": "staff_id",
+      "weight": 13.431000000000003,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_address_id",
+      "from": "staff",
+      "to": "address",
+      "via": "address_id",
+      "weight": 10,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_STAFF",
+      "from": "address",
+      "to": "staff",
+      "via": "address_id",
+      "weight": 11,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_customer_id",
+      "from": "payment",
+      "to": "customer",
+      "via": "customer_id",
+      "weight": 3.16,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_PAYMENT",
+      "from": "customer",
+      "to": "payment",
+      "via": "customer_id",
+      "weight": 3.4760000000000004,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_staff_id",
+      "from": "payment",
+      "to": "staff",
+      "via": "staff_id",
+      "weight": 3.16,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_PAYMENT",
+      "from": "staff",
+      "to": "payment",
+      "via": "staff_id",
+      "weight": 3.4760000000000004,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_rental_id",
+      "from": "payment",
+      "to": "rental",
+      "via": "rental_id",
+      "weight": 3.16,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_PAYMENT",
+      "from": "rental",
+      "to": "payment",
+      "via": "rental_id",
+      "weight": 3.4760000000000004,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_language_id",
+      "from": "film",
+      "to": "language",
+      "via": "language_id",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_FILM",
+      "from": "language",
+      "to": "film",
+      "via": "language_id",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    }
+  ]
+}

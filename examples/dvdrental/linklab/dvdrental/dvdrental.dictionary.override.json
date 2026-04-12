@@ -1,0 +1,17 @@
+{
+  "//": "Labels humains pour les routes — mergés avec dictionary.gen.json après build.",
+  "//example": {
+    "movies→people[actor]": {
+      "label": "Acteurs de",
+      "inverse": "Films avec"
+    },
+    "movies→people[director]": {
+      "label": "Réalisé par",
+      "inverse": "Films dirigés par"
+    },
+    "director_in→actor": {
+      "label": "Acteurs des films dirigés par"
+    }
+  },
+  "routes": {}
+}
