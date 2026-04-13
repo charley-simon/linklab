@@ -2,7 +2,7 @@
   "source": {
     "type": "postgresql",
     "name": "dvdrental",
-    "generatedAt": "2026-04-12T11:24:29.760Z"
+    "generatedAt": "2026-04-13T17:49:42.526Z"
   },
   "entities": [
     {

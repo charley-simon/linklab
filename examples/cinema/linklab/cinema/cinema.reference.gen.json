@@ -1,0 +1,961 @@
+{
+  "nodes": [
+    {
+      "id": "categories",
+      "type": "table",
+      "rowCount": 18,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "credits",
+      "type": "table",
+      "rowCount": 2957,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "movieId",
+          "type": "string"
+        },
+        {
+          "name": "personId",
+          "type": "string"
+        },
+        {
+          "name": "jobId",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "departments",
+      "type": "table",
+      "rowCount": 4,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "jobs",
+      "type": "table",
+      "rowCount": 28,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "departmentId",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "movies",
+      "type": "table",
+      "rowCount": 200,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "originalTitle",
+          "type": "string"
+        },
+        {
+          "name": "categories",
+          "type": "string"
+        },
+        {
+          "name": "releaseYear",
+          "type": "string"
+        },
+        {
+          "name": "trailerSource",
+          "type": "string"
+        },
+        {
+          "name": "isLocal",
+          "type": "string"
+        },
+        {
+          "name": "movieSource",
+          "type": "string"
+        },
+        {
+          "name": "synopsis",
+          "type": "string"
+        },
+        {
+          "name": "tagLine",
+          "type": "string"
+        },
+        {
+          "name": "popularity",
+          "type": "string"
+        },
+        {
+          "name": "rating",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "type": "table",
+      "rowCount": 2363,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "gender",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "users",
+      "type": "table",
+      "rowCount": 5,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        },
+        {
+          "name": "isAdmin",
+          "type": "string"
+        },
+        {
+          "name": "preferences",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "name": "FK_movieId",
+      "from": "credits",
+      "to": "movies",
+      "via": "movieId",
+      "weight": 2.4699999999999998,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_CREDITS",
+      "from": "movies",
+      "to": "credits",
+      "via": "movieId",
+      "weight": 2.717,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_personId",
+      "from": "credits",
+      "to": "people",
+      "via": "personId",
+      "weight": 2.4699999999999998,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_CREDITS",
+      "from": "people",
+      "to": "credits",
+      "via": "personId",
+      "weight": 2.717,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_jobId",
+      "from": "credits",
+      "to": "jobs",
+      "via": "jobId",
+      "weight": 2.4699999999999998,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_CREDITS",
+      "from": "jobs",
+      "to": "credits",
+      "via": "jobId",
+      "weight": 2.717,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "FK_departmentId",
+      "from": "jobs",
+      "to": "departments",
+      "via": "departmentId",
+      "weight": 1,
+      "metadata": {
+        "type": "physical"
+      }
+    },
+    {
+      "name": "LIST_OF_JOBS",
+      "from": "departments",
+      "to": "jobs",
+      "via": "departmentId",
+      "weight": 1.1,
+      "metadata": {
+        "type": "physical_reverse"
+      }
+    },
+    {
+      "name": "actor",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 1
+        }
+      }
+    },
+    {
+      "name": "actor_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 1
+        }
+      }
+    },
+    {
+      "name": "director",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 2
+        }
+      }
+    },
+    {
+      "name": "director_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 2
+        }
+      }
+    },
+    {
+      "name": "writer",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 3
+        }
+      }
+    },
+    {
+      "name": "writer_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 3
+        }
+      }
+    },
+    {
+      "name": "novel",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 4
+        }
+      }
+    },
+    {
+      "name": "novel_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 4
+        }
+      }
+    },
+    {
+      "name": "screenplay",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 5
+        }
+      }
+    },
+    {
+      "name": "screenplay_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 5
+        }
+      }
+    },
+    {
+      "name": "dialogue",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 6
+        }
+      }
+    },
+    {
+      "name": "dialogue_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 6
+        }
+      }
+    },
+    {
+      "name": "lyricist",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 7
+        }
+      }
+    },
+    {
+      "name": "lyricist_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 7
+        }
+      }
+    },
+    {
+      "name": "story",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 8
+        }
+      }
+    },
+    {
+      "name": "story_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 8
+        }
+      }
+    },
+    {
+      "name": "characters",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 9
+        }
+      }
+    },
+    {
+      "name": "characters_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 9
+        }
+      }
+    },
+    {
+      "name": "adaptation",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 10
+        }
+      }
+    },
+    {
+      "name": "adaptation_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 10
+        }
+      }
+    },
+    {
+      "name": "creative producer",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 11
+        }
+      }
+    },
+    {
+      "name": "creative producer_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 11
+        }
+      }
+    },
+    {
+      "name": "theatre play",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 12
+        }
+      }
+    },
+    {
+      "name": "theatre play_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 12
+        }
+      }
+    },
+    {
+      "name": "story artist",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 13
+        }
+      }
+    },
+    {
+      "name": "story artist_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 13
+        }
+      }
+    },
+    {
+      "name": "original story",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 14
+        }
+      }
+    },
+    {
+      "name": "original story_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 14
+        }
+      }
+    },
+    {
+      "name": "head of story",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 15
+        }
+      }
+    },
+    {
+      "name": "head of story_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 15
+        }
+      }
+    },
+    {
+      "name": "story coordinator",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 16
+        }
+      }
+    },
+    {
+      "name": "story coordinator_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 16
+        }
+      }
+    },
+    {
+      "name": "comic book",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 17
+        }
+      }
+    },
+    {
+      "name": "comic book_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 17
+        }
+      }
+    },
+    {
+      "name": "author",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 18
+        }
+      }
+    },
+    {
+      "name": "author_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 18
+        }
+      }
+    },
+    {
+      "name": "short story",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 19
+        }
+      }
+    },
+    {
+      "name": "short story_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 19
+        }
+      }
+    },
+    {
+      "name": "book",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 20
+        }
+      }
+    },
+    {
+      "name": "book_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 20
+        }
+      }
+    },
+    {
+      "name": "co-writer",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 21
+        }
+      }
+    },
+    {
+      "name": "co-writer_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 21
+        }
+      }
+    },
+    {
+      "name": "storyboard",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 22
+        }
+      }
+    },
+    {
+      "name": "storyboard_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 22
+        }
+      }
+    },
+    {
+      "name": "original series creator",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 23
+        }
+      }
+    },
+    {
+      "name": "original series creator_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 23
+        }
+      }
+    },
+    {
+      "name": "original film writer",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 24
+        }
+      }
+    },
+    {
+      "name": "original film writer_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 24
+        }
+      }
+    },
+    {
+      "name": "story supervisor",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 25
+        }
+      }
+    },
+    {
+      "name": "story supervisor_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 25
+        }
+      }
+    },
+    {
+      "name": "screenstory",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 26
+        }
+      }
+    },
+    {
+      "name": "screenstory_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 26
+        }
+      }
+    },
+    {
+      "name": "story editor",
+      "from": "movies",
+      "to": "people",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 27
+        }
+      }
+    },
+    {
+      "name": "story editor_in",
+      "from": "people",
+      "to": "movies",
+      "via": "credits",
+      "weight": 0.8,
+      "metadata": {
+        "type": "semantic_view",
+        "condition": {
+          "jobId": 27
+        }
+      }
+    }
+  ]
+}

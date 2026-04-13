@@ -1,11 +1,12 @@
 {
-  "version": "2.0.1",
-  "compiledAt": "2026-04-12T11:24:29.782Z",
+  "version": "2.0.2",
+  "compiledAt": "2026-04-13T17:49:42.545Z",
   "config": {
     "weightThreshold": 1000,
     "minUsage": 0,
     "keepFallbacks": true,
-    "maxFallbacks": 2
+    "maxFallbacks": 2,
+    "expose": "none"
   },
   "nodes": [
     {
@@ -29,7 +30,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "store",
@@ -52,7 +54,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "address",
@@ -91,7 +94,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "category",
@@ -110,7 +114,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "city",
@@ -133,7 +138,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "country",
@@ -152,7 +158,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "customer",
@@ -199,7 +206,8 @@
           "name": "active",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "film_actor",
@@ -226,7 +234,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "film_category",
@@ -253,7 +262,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "inventory",
@@ -276,7 +286,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "language",
@@ -295,7 +306,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "rental",
@@ -330,7 +342,8 @@
           "name": "last_update",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "staff",
@@ -381,7 +394,8 @@
           "name": "picture",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "payment",
@@ -412,7 +426,8 @@
           "name": "payment_date",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     },
     {
       "id": "film",
@@ -471,7 +486,8 @@
           "name": "fulltext",
           "type": "string"
         }
-      ]
+      ],
+      "exposed": false
     }
   ],
   "routes": [
