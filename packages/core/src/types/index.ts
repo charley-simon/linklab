@@ -23,6 +23,7 @@ export interface GraphNode {
   id: string
   type: string
   name?: string
+  exposed?: boolean
   [key: string]: any
 }
 
@@ -187,6 +188,7 @@ export interface CompilerConfig {
   minUsage?: number
   keepFallbacks: boolean
   maxFallbacks: number
+  expose?: ExposeConfig
 }
 
 export interface CompilationStats {
@@ -232,6 +234,12 @@ export interface CacheConfig {
 // ============================================================
 
 export type Awaitable<T> = T | Promise<T>
+
+export type ExposeConfig =
+  | 'all'
+  | 'none'
+  | { include: string[] }
+  | { exclude: string[] }
 
 export class LinkLabError extends Error {
   constructor(

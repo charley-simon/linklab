@@ -229,7 +229,8 @@ export async function build(options = {}) {
             const compiler = new GraphCompiler({
                 weightThreshold: config.compiler?.weightThreshold ?? 1000,
                 keepFallbacks: config.compiler?.keepFallbacks ?? true,
-                maxFallbacks: config.compiler?.maxFallbacks ?? 2
+                maxFallbacks: config.compiler?.maxFallbacks ?? 2,
+                expose: config.expose ?? 'none'
             });
             const compiled = compiler.compile(rawGraph, metrics);
             compiled.version = newVersion;

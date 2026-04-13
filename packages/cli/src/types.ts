@@ -2,7 +2,7 @@
  * types.ts — Types publics de @linklab/cli
  */
 
-import type { UseCase } from '@linklab/core'
+import type { UseCase, ExposeConfig } from '@linklab/core'
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
@@ -17,6 +17,7 @@ export interface LinklabConfig {
     user?:             string
     password?:         string
     dataDir?:          string
+    expose?:           ExposeConfig
   }
   output?: {
     dir?: string             // défaut: './linklab/{alias}'
@@ -87,4 +88,5 @@ export interface ServerOptions {
   port?:   number
   host?:   string
   prefix?: string
+  exposeAll?: boolean
 }

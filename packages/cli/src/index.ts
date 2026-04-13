@@ -164,6 +164,7 @@ async function main() {
         port:   flags['port']   ? parseInt(flags['port'] as string) : undefined,
         host:   flags['host']   as string | undefined,
         prefix: flags['prefix'] as string | undefined,
+        exposeAll: Boolean(flags['expose-all']),
       })
       break
 
@@ -182,7 +183,6 @@ async function main() {
     case 'docs':
       await docs({ alias: alias ?? (flags['alias'] as string | undefined) })
       break
-
 
     case 'help':
     case '--help':

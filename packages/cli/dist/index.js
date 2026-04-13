@@ -143,6 +143,7 @@ async function main() {
                 port: flags['port'] ? parseInt(flags['port']) : undefined,
                 host: flags['host'],
                 prefix: flags['prefix'],
+                exposeAll: Boolean(flags['expose-all']),
             });
             break;
         case 'doctor':

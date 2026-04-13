@@ -87,6 +87,14 @@ export async function server(options = {}) {
         edges,
         routes: compiled.routes,
     };
+    // Si --expose-all : forcer exposed: true sur tous les nodes
+    // Override la config expose compilée dans le graphe
+    if (options.exposeAll) {
+        graphForPlugin.nodes = graphForPlugin.nodes.map((n) => ({
+            ...n,
+            exposed: true,
+        }));
+    }
     let dataLoaderOptions;
     let mode;
     // Mode JSON

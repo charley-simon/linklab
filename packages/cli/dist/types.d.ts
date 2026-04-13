@@ -1,7 +1,7 @@
 /**
  * types.ts — Types publics de @linklab/cli
  */
-import type { UseCase } from '@linklab/core';
+import type { UseCase, ExposeConfig } from '@linklab/core';
 export interface LinklabConfig {
     alias?: string;
     source: {
@@ -13,6 +13,7 @@ export interface LinklabConfig {
         user?: string;
         password?: string;
         dataDir?: string;
+        expose?: ExposeConfig;
     };
     output?: {
         dir?: string;
@@ -69,5 +70,6 @@ export interface ServerOptions {
     port?: number;
     host?: string;
     prefix?: string;
+    exposeAll?: boolean;
 }
 //# sourceMappingURL=types.d.ts.map

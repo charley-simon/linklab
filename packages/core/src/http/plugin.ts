@@ -133,6 +133,19 @@ export interface ResponseMeta {
   count?:   number
 }
 
+// ── Helper — vérifie qu'un node est exposé ───────────────────
+// Un node sans flag exposed (graphe ancien) est considéré exposé
+// pour assurer la rétrocompatibilité.
+// Un node avec exposed: false est bloqué.
+
+function isExposed(graph: Graph, entity: string): boolean {
+  const node = graph.nodes.find(n => n.id === entity)
+  if (!node) return false
+  // Rétrocompatibilité : si exposed n'est pas défini, on expose
+  if (node.exposed === undefined) return true
+  return node.exposed === true
+}
+
 // ── Plugin ────────────────────────────────────────────────────
 
 const linklabPluginImpl: FastifyPluginAsync<LinklabPluginOptions> = async (
@@ -173,8 +186,6 @@ const linklabPluginImpl: FastifyPluginAsync<LinklabPluginOptions> = async (
   fastify.addHook('preHandler', async (req: FastifyRequest) => {
     const userCtx = await extractUser(req)
 
-    // Construire le Trail depuis l'URL
-    // On retire le préfixe si présent
     const rawPath = req.url.split('?')[0]
     const path    = prefix ? rawPath.replace(new RegExp(`^${prefix}`), '') : rawPath
 
@@ -188,7 +199,6 @@ const linklabPluginImpl: FastifyPluginAsync<LinklabPluginOptions> = async (
   })
 
   // ── Routes génériques — capture tous les paths ─────────────
-  // On enregistre : le prefix exact + le wildcard profond
   const routePath  = prefix ? `${prefix}/*` : '/*'
   const rootPath   = prefix || '/'
 
@@ -216,6 +226,21 @@ const linklabPluginImpl: FastifyPluginAsync<LinklabPluginOptions> = async (
         _links: rootLinks,
         _trail: '',
         _meta:  { entity: 'root', depth: 0, resolved: 0, timing: Date.now() - start },
+      }
+    }
+
+    // ── Vérifier que toutes les frames du Trail pointent vers des nodes exposés
+    // On vérifie chaque entité du Trail — si l'une est non exposée → 404.
+    // Cela couvre aussi les vues sémantiques : leur entité cible résolue
+    // est vérifiée au moment de la résolution du Trail.
+    for (const frame of trail.frames) {
+      if (!isExposed(graph, frame.entity)) {
+        reply.code(404)
+        return reply.send({
+          error:  'NOT_FOUND',
+          reason: `Entity '${frame.entity}' is not exposed`,
+          _trail: TrailParser.toFluent(trail),
+        }) as any
       }
     }
 
@@ -305,11 +330,13 @@ const linklabPluginImpl: FastifyPluginAsync<LinklabPluginOptions> = async (
 }
 
 // ── Helper — liens racines ────────────────────────────────────
+// Filtre les nodes non exposés des liens racines.
 
 function buildRootLinks(graph: Graph, prefix: string): Record<string, any> {
-  // Les nœuds racines = nœuds qui n'ont aucune arête entrante
   const hasIncoming = new Set(graph.edges.map(e => e.to))
-  const roots       = graph.nodes.filter(n => !hasIncoming.has(n.id))
+  const roots       = graph.nodes.filter(n =>
+    !hasIncoming.has(n.id) && isExposed(graph, n.id)
+  )
 
   const links: Record<string, any> = {
     self: { href: prefix || '/', method: 'GET' }

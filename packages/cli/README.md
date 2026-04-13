@@ -21,7 +21,8 @@ npm install -g @linklab/cli
 ### PostgreSQL
 
 ```bash
-linklab init dvdrental --source postgres://localhost/dvdrental
+linklab init dvdrental
+# edit dvdrental.linklab.ts — set your connection details
 linklab build dvdrental
 linklab repl dvdrental
 ```
@@ -93,6 +94,34 @@ export default defineConfig({
 
 ---
 
+## Controlling what is exposed
+
+By default, `expose` is set to `'none'` — nothing in your database is accessible over HTTP without an explicit declaration. This is the secure default.
+
+```typescript
+// expose nothing (default — secure)
+expose: 'none'
+
+// expose everything (demos and local exploration only)
+expose: 'all'
+
+// explicit allowlist (production)
+expose: { include: ['film', 'actor', 'category'] }
+
+// explicit denylist
+expose: { exclude: ['staff', 'payment', 'users'] }
+```
+
+The `expose` config is compiled into the graph — each node gets an `exposed` flag. Entities with `exposed: false` return 404 over HTTP, including their semantic views.
+
+For demos without editing your config:
+
+```bash
+linklab server dvdrental --expose-all
+```
+
+---
+
 ## Generated file structure
 
 ```
@@ -123,7 +152,6 @@ Creates `{alias}.linklab.ts` and `linklab/{alias}/` structure.
 
 ```bash
 linklab init cinema
-linklab init dvdrental --source postgres://localhost/dvdrental
 linklab init cinema --force    # overwrite if exists
 ```
 
@@ -185,7 +213,7 @@ Tab shows only entities reachable from the current context. The generated SQL is
 Starts a REST + HATEOAS Level 3 server from the compiled graph.
 
 ```bash
-linklab server dvdrental
+linklab server dvdrental --expose-all          # expose everything (demo)
 linklab server dvdrental --port 4000
 linklab server dvdrental --host 0.0.0.0
 linklab server dvdrental --prefix /v1
@@ -222,7 +250,7 @@ curl http://localhost:3000/api/film/1/actor
 
 Links are inferred from the graph — not configured manually.
 
-> `linklab server` is for development and demos. For production, use `linklabPlugin` directly in your own Fastify server. See [@linklab/core](../linklab/README.md).
+> `linklab server` is for development and demos. For production, use `linklabPlugin` directly in your own Fastify server. See [@linklab/core](../core/README.md).
 
 ---
 
@@ -332,19 +360,6 @@ linklab status
 
 ---
 
-### `linklab observe <alias>`
-
-Real-time observability — trails, spans, metrics.
-
-```bash
-linklab observe cinema
-linklab observe cinema --record
-linklab observe cinema --replay <id>
-linklab observe cinema --duckdb
-```
-
----
-
 ## Recommended workflow
 
 ```bash
@@ -379,14 +394,15 @@ It compiles a navigation graph from your existing schema and resolves paths thro
 You don't need to rewrite your project. Point LinkLab at an existing database, explore what it finds, and decide from there.
 
 ```bash
-linklab init myproject --source postgres://localhost/mydb
+linklab init myproject
+# edit myproject.linklab.ts
 linklab build myproject
 linklab repl myproject
 ```
 
 If something doesn't work, open an issue. If you have an idea, same. This is a solo project — human feedback is what's missing most.
 
----
+## Links
 
 - [GitHub](https://github.com/charley-simon/linklab)
 - [Report an issue](https://github.com/charley-simon/linklab/issues)

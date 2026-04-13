@@ -101,7 +101,14 @@ export async function server(options: ServerOptions = {}): Promise<void> {
     edges,
     routes: compiled.routes,
   }
-
+// Si --expose-all : forcer exposed: true sur tous les nodes
+// Override la config expose compilée dans le graphe
+if (options.exposeAll) {
+  graphForPlugin.nodes = graphForPlugin.nodes.map((n: any) => ({
+    ...n,
+    exposed: true,
+  }))
+}
   let dataLoaderOptions: any
   let mode: string
 

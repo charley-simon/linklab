@@ -5,28 +5,32 @@
  *   - Routes sémantiques (semantic_view) compilées et incluses
  *   - compiled-graph contient physical + semantic routes
  *   - version bump : '2.0.0'
+ *
+ * v2.1 :
+ *   - Support expose config (ADR-0010)
+ *   - node.exposed compilé depuis CompilerConfig.expose
  */
 
-import type { Graph, CompiledGraph, CompilerConfig, RouteInfo, MetricsMap } from '../types/index.js'
+import type { Graph, CompiledGraph, CompilerConfig, RouteInfo, MetricsMap, GraphNode, ExposeConfig } from '../types/index.js'
 import { PathFinder } from '../core/PathFinder.js'
 
 export interface EdgeMetadata {
   fromCol: string
   toCol: string
-  // Condition portée sur la table SOURCE du JOIN (ex: credits.jobId = 1)
   condition?: Record<string, unknown>
   label?: string
 }
 
 export class GraphCompiler {
-  private config: Required<CompilerConfig>
+  private config: Required<Omit<CompilerConfig, 'expose'>> & { expose: ExposeConfig }
 
   constructor(config: Partial<CompilerConfig> = {}) {
     this.config = {
       weightThreshold: config.weightThreshold ?? 1000,
       minUsage: config.minUsage ?? 0,
       keepFallbacks: config.keepFallbacks ?? true,
-      maxFallbacks: config.maxFallbacks ?? 2
+      maxFallbacks: config.maxFallbacks ?? 2,
+      expose: config.expose ?? 'none'
     }
   }
 
@@ -37,7 +41,7 @@ export class GraphCompiler {
       version: '2.0.0',
       compiledAt: new Date().toISOString(),
       config: this.config,
-      nodes: [...graph.nodes],
+      nodes: this.compileNodes(graph.nodes, this.config.expose),
       routes: [],
       stats: { totalPairs: 0, routesCompiled: 0, routesFiltered: 0, compressionRatio: '0%' }
     }
@@ -57,8 +61,6 @@ export class GraphCompiler {
         e.metadata?.type !== 'virtual' &&
         e.metadata?.type !== 'SEMANTIC'
     )
-    // Ne créer un inverse synthétique que si l'inverse n'existe pas déjà
-    // Évite les doublons sur les graphes déjà bidirectionnels (ex: metro)
     const existingPairs = new Set(fkEdges.map((e: any) => `${e.from}→${e.to}`))
     const inverseEdges = fkEdges
       .filter((e: any) => !existingPairs.has(`${e.to}→${e.from}`))
@@ -99,21 +101,12 @@ export class GraphCompiler {
       }
     }
 
-    // ── 2b. Routes virtuelles (edges custom sans FK) ──────────────────────────
-    //
-    // Les edges avec metadata.type === 'virtual' sont des relations déclarées
-    // par le dev dans {alias}.override.json sans FK réelle dans la source.
-    // Ex: { from: 'movies', to: 'categories', via: 'categories', type: 'virtual' }
-    //
-    // On génère une route directe via la table `via` si elle existe dans le graph,
-    // ou une route directe from→to sinon.
-
+    // ── 2b. Routes virtuelles ─────────────────────────────────────────────────
     const virtualEdges = graph.edges.filter((e: any) => e.metadata?.type === 'virtual')
 
     let virtualKept = 0
     for (const edge of virtualEdges as any[]) {
       const { from, to, via, name, weight } = edge as any
-      // Vérifier que from et to existent dans le graph
       if (!nodeIds.includes(from) || !nodeIds.includes(to)) continue
 
       const viaTable = via && nodeIds.includes(via) ? via : null
@@ -145,38 +138,25 @@ export class GraphCompiler {
       virtualKept++
     }
 
-    // ── 3. Routes composées : X(semA) → pivot → X(semB) ─────────────────────
-    //
-    // Détecte les paires de routes sémantiques qui partagent un pivot
-    // et génère les routes composées correspondantes.
-    //
-    // Ex: people(director_in) → credits → movies → credits → people(actor)
-    //     = "acteurs des films dirigés par X"
-    //     label: "director_in→actor"
-
+    // ── 3. Routes composées ───────────────────────────────────────────────────
     const compiledSemRoutes = compiled.routes.filter((r: any) => r.semantic) as any[]
     let composedKept = 0
 
-    // Grouper par entité source
     const semByFrom = new Map<string, any[]>()
     for (const r of compiledSemRoutes) {
       if (!semByFrom.has(r.from)) semByFrom.set(r.from, [])
       semByFrom.get(r.from)!.push(r)
     }
 
-    // Pour chaque entité, chercher les paires (outRoute, inRoute) via un pivot commun
     for (const [entityId, outRoutes] of semByFrom) {
-      // Routes qui arrivent sur entityId
       const inRoutes = compiledSemRoutes.filter((r: any) => r.to === entityId)
       if (!inRoutes.length) continue
 
       for (const rOut of outRoutes) {
         const pivot = rOut.to
-        // Routes qui partent de pivot ET arrivent sur entityId
         const matchingIn = inRoutes.filter((r: any) => r.from === pivot)
 
         for (const rIn of matchingIn) {
-          // Éviter les routes identiques (même label)
           if (rOut.label === rIn.label) continue
 
           const composedLabel = `${rOut.label}→${rIn.label}`
@@ -184,13 +164,10 @@ export class GraphCompiler {
           const composedPath = [...rOut.primary.path, ...rIn.primary.path.slice(1)]
           const composedEdges = [...rOut.primary.edges, ...rIn.primary.edges]
 
-          // Vérifier les métriques — si la route est disqualifiée, l'ignorer
-          // Clé composée = même format que train.ts
           const metricKey = `composed:${entityId}→${entityId}:${composedLabel}`
           const metric = metrics.get(metricKey)
           if (metrics.size > 0) {
-            // Des métriques existent (post-train) → filtrer strictement
-            if (!metric) continue // route absente = non testée ou filtrée
+            if (!metric) continue
             const w = metric.avgTime ?? composedWeight
             if (!metric.used || w > this.config.weightThreshold) continue
           }
@@ -232,32 +209,38 @@ export class GraphCompiler {
     return compiled
   }
 
+  // ── Compile exposed flag sur chaque node ────────────────────────────────────
+
+  private compileNodes(nodes: GraphNode[], expose: ExposeConfig): GraphNode[] {
+    return nodes.map(node => {
+      let exposed: boolean
+
+      if (expose === 'all') {
+        exposed = true
+      } else if (expose === 'none') {
+        exposed = false
+      } else if ('include' in expose) {
+        exposed = expose.include.includes(node.id)
+      } else {
+        exposed = !expose.exclude.includes(node.id)
+      }
+
+      return { ...node, exposed }
+    })
+  }
+
   // ── Route sémantique ─────────────────────────────────────────────────────────
-  //
-  // movies→people[actor] (via credits, condition: { jobId: 1 })
-  //
-  //   path  = ['movies', 'credits', 'people']
-  //   edges = [
-  //     { fromCol:'id', toCol:'movieId', condition:{ jobId:1 }, label:'actor' }
-  //     { fromCol:'personId', toCol:'id' }
-  //   ]
-  //
-  // SQL généré :
-  //   INNER JOIN credits ON movies.id = credits.movieId AND credits.jobId = 1
-  //   INNER JOIN people  ON credits.personId = people.id
 
   private compileSemanticRoute(edge: any, graph: Graph): any | null {
     const { from, to, via, metadata } = edge
     const condition: Record<string, unknown> = metadata.condition ?? {}
     const label: string = edge.name ?? metadata.label ?? 'view'
 
-    // Trouver edge from→via (ex: movies→credits, physical_reverse)
     const e1Raw = graph.edges.find(
       (e: any) =>
         ((e.from === from && e.to === via) || (e.from === via && e.to === from)) &&
         (e.metadata?.type === 'physical' || e.metadata?.type === 'physical_reverse')
     )
-    // Trouver edge via→to (ex: credits→people, physical)
     const e2Raw = graph.edges.find(
       (e: any) =>
         ((e.from === via && e.to === to) || (e.from === to && e.to === via)) &&
@@ -266,19 +249,15 @@ export class GraphCompiler {
 
     if (!e1Raw || !e2Raw) return null
 
-    // Edge 1 : movies → credits
-    // movies.id = credits.movieId  + condition credits.jobId = 1
-    const e1IsReversed = e1Raw.from === via // ex: physical dit credits→movies, on traverse movies→credits
+    const e1IsReversed = e1Raw.from === via
     const e1: EdgeMetadata = {
       fromCol: e1IsReversed ? 'id' : (e1Raw.via ?? 'id'),
       toCol: e1IsReversed ? (e1Raw.via ?? 'id') : 'id',
-      condition, // condition sur la table JOIN courante (credits)
+      condition,
       label
     }
 
-    // Edge 2 : credits → people
-    // credits.personId = people.id  (pas de condition)
-    const e2IsReversed = e2Raw.from === to // ex: physical dit people→credits
+    const e2IsReversed = e2Raw.from === to
     const e2: EdgeMetadata = {
       fromCol: e2IsReversed ? 'id' : (e2Raw.via ?? 'id'),
       toCol: e2IsReversed ? (e2Raw.via ?? 'id') : 'id'
@@ -301,7 +280,7 @@ export class GraphCompiler {
     }
   }
 
-  // ── Routes physiques (identique v1) ──────────────────────────────────────────
+  // ── Routes physiques ──────────────────────────────────────────────────────────
 
   private getAllPairs(nodeIds: string[]): Array<{ from: string; to: string }> {
     const pairs: Array<{ from: string; to: string }> = []
