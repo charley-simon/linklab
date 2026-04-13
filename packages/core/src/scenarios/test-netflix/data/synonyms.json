@@ -1,8 +1,0 @@
-{
-  "_comment": "Project-specific synonyms for the Netflix-like scenario. Merged with config/synonyms.json by JsonSchemaExtractor.",
-
-  "movie":  "movies",
-  "job":    "jobs",
-  "user":   "users",
-  "department": "departments"
-}

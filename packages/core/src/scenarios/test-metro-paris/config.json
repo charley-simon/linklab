@@ -1,6 +1,0 @@
-{
-  "mode": "PATHFIND",
-  "description": "Métro Parisien — 312 stations, 14 lignes, poids en minutes réels RATP",
-  "defaultQuery": "chatelet-opera",
-  "queriesFile": "./queries.ts"
-}

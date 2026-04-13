@@ -1,0 +1,1 @@
+{"version":3,"file":"BaseFormatter.d.ts","sourceRoot":"","sources":["../../src/formatters/BaseFormatter.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,KAAK,EAAE,cAAc,EAAE,gBAAgB,EAAE,MAAM,mBAAmB,CAAA;AAEzE,MAAM,WAAW,aAAa;IAC5B,gDAAgD;IAChD,MAAM,CAAC,IAAI,EAAE,cAAc,GAAG,MAAM,CAAA;IAEpC,0CAA0C;IAC1C,YAAY,CAAC,MAAM,EAAE,gBAAgB,GAAG,MAAM,CAAA;CAC/C"}

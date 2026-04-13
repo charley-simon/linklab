@@ -1,4 +1,4 @@
-# @linklab/cli
+# @linklabjs/cli
 
 > Explore, navigate and expose your data — zero application code.
 
@@ -11,7 +11,7 @@ No ORM. No migrations. No hidden SQL.
 ## Installation
 
 ```bash
-npm install -g @linklab/cli
+npm install -g @linklabjs/cli
 ```
 
 ---
@@ -250,7 +250,7 @@ curl http://localhost:3000/api/film/1/actor
 
 Links are inferred from the graph — not configured manually.
 
-> `linklab server` is for development and demos. For production, use `linklabPlugin` directly in your own Fastify server. See [@linklab/core](../core/README.md).
+> `linklab server` is for development and demos. For production, use `linklabPlugin` directly in your own Fastify server. See [@linklabjs/core](../core/README.md).
 
 ---
 

@@ -1,4 +1,4 @@
-# @linklab/telemetry
+# @linklabjs/telemetry
 
 Observability pipeline for LinkLab navigation engine.
 
@@ -94,16 +94,16 @@ An OTel shim is available if you need to forward traces to an existing collector
 ## Installation
 
 ```bash
-npm install @linklab/telemetry
+npm install @linklabjs/telemetry
 ```
 
-Requires `@linklab/core`.
+Requires `@linklabjs/core`.
 
 ---
 
 ## Status
 
-`@linklab/telemetry` is stable for internal use. The DuckDB storage layer and CalibrationJob are production-ready. The real-time dashboard integration is under active development.
+`@linklabjs/telemetry` is stable for internal use. The DuckDB storage layer and CalibrationJob are production-ready. The real-time dashboard integration is under active development.
 
 ---
 

@@ -1,0 +1,145 @@
+import fs from 'fs';
+export class GraphExtractor {
+    provider;
+    actionRegistry;
+    constructor(provider, actionRegistry) {
+        this.provider = provider;
+        this.actionRegistry = actionRegistry;
+    }
+    /**
+     * Extrait le graphe complet : Tables + Actions + Relations
+     */
+    async extract() {
+        console.log('📊 LinkLab : Extraction du graphe sémantique...');
+        // 1. Extraction des tables et leurs métadonnées
+        const tables = await this.getTables();
+        console.log(`   Found ${tables.length} tables`);
+        // 2. Extraction des clés étrangères (Relations natives)
+        const foreignKeys = await this.getForeignKeys();
+        console.log(`   Found ${foreignKeys.length} foreign keys`);
+        // 3. Construction des Nœuds (Tables)
+        const nodes = tables.map(t => ({
+            id: t.name,
+            type: 'table',
+            columns: t.columns,
+            rowCount: t.rowCount,
+            description: t.description || ''
+        }));
+        // 4. Injection des Nœuds (Actions) - Si présentes dans le registre
+        if (this.actionRegistry) {
+            const actions = this.actionRegistry.getAll();
+            actions.forEach(action => {
+                nodes.push({
+                    id: action.id,
+                    type: 'action',
+                    description: action.description || 'Action système',
+                    params: action.requiredParams
+                });
+            });
+        }
+        // 5. Construction des Edges (Liaisons)
+        const edges = foreignKeys.map(fk => ({
+            name: `rel_${fk.fromTable}_${fk.toTable}`,
+            from: fk.fromTable,
+            to: fk.toTable,
+            via: fk.column,
+            type: 'foreign_key',
+            weight: this.calculateInitialWeight(fk, tables)
+        }));
+        const graph = { nodes, edges };
+        console.log('✅ Graphe LinkLab extrait avec succès');
+        fs.writeFileSync('./graph.json', JSON.stringify(graph, null, 2));
+        return graph;
+    }
+    async getTables() {
+        // On récupère aussi la description de la table (COMMENT ON TABLE)
+        const query = `
+      SELECT
+        t.table_name as name,
+        obj_description(pgc.oid, 'pg_class') as description
+      FROM information_schema.tables t
+      JOIN pg_class pgc ON t.table_name = pgc.relname
+      JOIN pg_namespace pgn ON pgc.relnamespace = pgn.oid
+      WHERE t.table_schema = 'public'
+        AND t.table_type = 'BASE TABLE'
+        AND pgn.nspname = 'public'
+    `;
+        const result = await this.provider.query(query);
+        const tables = [];
+        for (const table of result) {
+            const columns = await this.getColumns(table.name);
+            const rowCount = await this.getRowCount(table.name);
+            tables.push({
+                name: table.name,
+                columns,
+                rowCount,
+                description: table.description
+            });
+        }
+        return tables;
+    }
+    async getColumns(tableName) {
+        // Récupère les colonnes ET leurs descriptions (COMMENT ON COLUMN)
+        const query = `
+      SELECT
+        cols.column_name,
+        cols.data_type,
+        (SELECT pg_catalog.col_description(c.oid, cols.ordinal_position::int)
+         FROM pg_catalog.pg_class c
+         WHERE c.relname = cols.table_name) as description
+      FROM information_schema.columns cols
+      WHERE table_name = $1
+    `;
+        const result = await this.provider.query(query, [tableName]);
+        return result.map(c => ({
+            name: c.column_name,
+            type: c.data_type,
+            description: c.description || ''
+        }));
+    }
+    async getRowCount(tableName) {
+        try {
+            const query = `SELECT reltuples::bigint as count FROM pg_class WHERE relname = $1`;
+            const result = await this.provider.query(query, [tableName]);
+            return parseInt(result[0]?.count || '0', 10);
+        }
+        catch {
+            return 0;
+        }
+    }
+    async getForeignKeys() {
+        const query = `
+      SELECT
+        tc.table_name as from_table,
+        kcu.column_name as column,
+        ccu.table_name as to_table,
+        -- Vérifie si la colonne est unique ou PK pour la cardinalité
+        (SELECT COUNT(*)
+         FROM information_schema.table_constraints i_tc
+         JOIN information_schema.key_column_usage i_kcu
+           ON i_tc.constraint_name = i_kcu.constraint_name
+         WHERE i_tc.table_name = tc.table_name
+           AND i_kcu.column_name = kcu.column_name
+           AND (i_tc.constraint_type = 'PRIMARY KEY' OR i_tc.constraint_type = 'UNIQUE')
+        ) > 0 as is_unique
+      FROM information_schema.table_constraints tc
+      JOIN information_schema.key_column_usage kcu ON tc.constraint_name = kcu.constraint_name
+      JOIN information_schema.constraint_column_usage ccu ON tc.constraint_name = ccu.constraint_name
+      WHERE tc.constraint_type = 'FOREIGN KEY'
+    `;
+        return await this.provider.query(query);
+    }
+    /**
+     * Calcul du poids initial (Physique de la donnée)
+     * On utilise le logarithme de la taille pour ne pas pénaliser trop lourdement
+     * les grosses tables, mais garder une notion de "frais de déplacement".
+     */
+    calculateInitialWeight(fk, tables) {
+        const targetTable = tables.find(t => t.name === fk.toTable);
+        if (!targetTable || targetTable.rowCount <= 0)
+            return 1;
+        // Formule : 1 + log10(n) -> 100 lignes = poids 3, 1M lignes = poids 7.
+        return 1 + Math.log10(targetTable.rowCount);
+    }
+}
+//# sourceMappingURL=GraphExtractor.js.map

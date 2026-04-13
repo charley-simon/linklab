@@ -1,4 +1,4 @@
-# @linklab/core
+# @linklabjs/core
 
 > **The graph is the map. The Trail is the traveler.**
 
@@ -42,7 +42,7 @@ LinkLab generates the SQL, finds the optimal path in the graph, and improves con
 ## Installation
 
 ```bash
-npm install @linklab/core
+npm install @linklabjs/core
 ```
 
 ---
@@ -50,7 +50,7 @@ npm install @linklab/core
 ## Quick start
 
 ```typescript
-import { Graph } from '@linklab/core'
+import { Graph } from '@linklabjs/core'
 import compiledGraph from './linklab/netflix/netflix.json'
 import * as dataset from './data'
 
@@ -86,7 +86,7 @@ SQL generated automatically
 Fluent API: cinema.directors('Nolan').movies.actors
 ```
 
-`linklab build` is a CLI command from `@linklab/cli`. It produces the compiled graph that `@linklab/core` consumes at runtime.
+`linklab build` is a CLI command from `@linklabjs/cli`. It produces the compiled graph that `@linklabjs/core` consumes at runtime.
 
 ---
 
@@ -130,7 +130,7 @@ Level 4  graph.weight(edge).set(value) / .compile()
 Main entry point. Builds a navigable graph.
 
 ```typescript
-import { Graph } from '@linklab/core'
+import { Graph } from '@linklabjs/core'
 
 const graph = new Graph(compiledGraph, {
   compiled?: CompiledGraph,           // precalculated routes
@@ -169,7 +169,7 @@ builder.links                     // subgraph between two nodes
 ### `Strategy`
 
 ```typescript
-import { Strategy } from '@linklab/core'
+import { Strategy } from '@linklabjs/core'
 
 Strategy.Shortest()       // minimal raw weight (default)
 Strategy.Comfort()        // +8 min per transfer
@@ -193,7 +193,7 @@ graph.weights    // Map<string, number>  — current weights
 
 ```typescript
 import Fastify from 'fastify'
-import { linklabPlugin } from '@linklab/core'
+import { linklabPlugin } from '@linklabjs/core'
 
 const app = Fastify()
 
@@ -237,7 +237,7 @@ Response includes `_links` generated from the graph:
 ### `QueryEngine`
 
 ```typescript
-import { QueryEngine } from '@linklab/core'
+import { QueryEngine } from '@linklabjs/core'
 
 const engine = new QueryEngine(compiledGraph)
 
@@ -259,7 +259,7 @@ interface QueryOptions {
 ### `PathFinder`
 
 ```typescript
-import { PathFinder } from '@linklab/core'
+import { PathFinder } from '@linklabjs/core'
 
 const finder = new PathFinder(graph)
 
@@ -274,7 +274,7 @@ finder.getStats()                           // { nodes, edges, avgDegree }
 ### `GraphCompiler`
 
 ```typescript
-import { GraphCompiler } from '@linklab/core'
+import { GraphCompiler } from '@linklabjs/core'
 
 const compiler = new GraphCompiler({
   weightThreshold?: number,   // pruning threshold (default: 1000)
@@ -346,7 +346,7 @@ import {
   GraphCompiler,
   NavigationEngine,
   linklabPlugin,
-} from '@linklab/core'
+} from '@linklabjs/core'
 
 import type {
   GraphNode,
@@ -354,7 +354,7 @@ import type {
   CompiledGraph,
   RouteInfo,
   QueryOptions,
-} from '@linklab/core'
+} from '@linklabjs/core'
 ```
 
 ---
@@ -378,8 +378,8 @@ See the [examples](./src/examples) folder.
 Extend `BaseFormatter` to transform raw navigation results into domain-readable output:
 
 ```typescript
-import { BaseFormatter } from '@linklab/core'
-import type { NavigationPath } from '@linklab/core'
+import { BaseFormatter } from '@linklabjs/core'
+import type { NavigationPath } from '@linklabjs/core'
 
 export class MyFormatter extends BaseFormatter {
   format(path: NavigationPath): string {

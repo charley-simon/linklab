@@ -1,38 +1,48 @@
 {
-  "name": "@linklab/cli",
-  "version": "0.1.0",
+  "name": "@linklabjs/cli",
+  "version": "0.1.4",
+  "type": "module",
   "description": "LinkLab CLI — linklab init / build / repl / server / test / train / stress / docs",
   "author": "Charley Simon",
   "license": "MIT",
-  "type": "module",
+  "homepage": "https://github.com/charley-simon/linklab",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charley-simon/linklab.git",
+    "directory": "packages/cli"
+  },
+  "keywords": ["linklab", "cli", "graph", "navigation", "hateoas", "rest", "api", "typescript"],
   "bin": {
     "linklab": "./bin/linklab.mjs"
   },
+  "files": ["dist", "bin", "src"],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "clean": "rimraf dist",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "build":          "tsc -p tsconfig.json",
+    "clean":          "rimraf dist",
+    "test":           "vitest run",
+    "test:watch":     "vitest",
+    "test:coverage":  "vitest run --coverage",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@linklab/core": "workspace:*",
-    "@linklab/telemetry": "workspace:*",
-    "@types/ws": "^8.18.1",
-    "chalk": "^5.6.2",
-    "fastify": "^5.8.2",
-    "fastify-plugin": "^5.1.0",
-    "js-yaml": "^4.1.1",
-    "ws": "^8.20.0"
+    "@linklabjs/core":      "^0.1.0",
+    "@linklabjs/telemetry": "^0.1.0",
+    "@types/ws":          "^8.18.1",
+    "chalk":              "^5.6.2",
+    "fastify":            "^5.8.2",
+    "fastify-plugin":     "^5.1.0",
+    "js-yaml":            "^4.1.1",
+    "ws":                 "^8.20.0"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^25.4.0",
-    "@types/ws": "^8.5.13",
+    "@types/js-yaml":      "^4.0.9",
+    "@types/node":         "^25.4.0",
+    "@types/ws":           "^8.5.13",
     "@vitest/coverage-v8": "^2.1.9",
-    "rimraf": "^5.0.10",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vitest": "^2.1.9"
-  }
+    "rimraf":              "^5.0.10",
+    "tsx":                 "^4.21.0",
+    "typescript":          "^5.9.3",
+    "vitest":              "^2.1.9"
+  },
+  "engines": { "node": ">=18" }
 }
